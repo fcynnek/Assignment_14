@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+    <head>
+        <title>Welcome</title>
+        <script src="https://kit.fontawesome.com/5e7463fc0b.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h2>Welcome! Please log in below:</h2>
+        <form >
+            
+        </form>
+        <div>
+            <i class="fa-solid fa-message-smile"></i>
+            Display Name: <input type="text" th:field="${users.name}">
+        </div>
+        <div>
+            <button type="button" id="submit">Submit</button>
+            <i class="fa-solid fa-paper-plane"></i>
+        </div>
+        <script type="text/javascript" src="/js/welcome.js"></script>
+    </body>
+</html>

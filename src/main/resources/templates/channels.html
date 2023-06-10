@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+    <head>
+        <title>Chats</title>
+    </head>
+    <body>
+        <h2>Channels</h2>
+        <div th:each="channel : ${channels}">
+            <a th:href="@{/channel/{channelName}(channelName=${channel.channelName})}" th:text="${channel.channelName}"></a>
+            
+        </div>
+    </body>
+</html>

@@ -3,8 +3,15 @@ package com.fcynnek.Assignment_14.domain;
 public class User {
 
 	private Integer userId;
-	private String name;
+	private String username;
 	
+	
+	
+	public User(Integer userId, String username) {
+		super();
+		this.userId = userId;
+		this.username = username;
+	}
 	
 	
 	public Integer getUserId() {
@@ -13,11 +20,12 @@ public class User {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	public String getName() {
-		return name;
+
+	public String getUsername() {
+		return username;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

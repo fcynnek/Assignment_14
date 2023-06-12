@@ -20,7 +20,7 @@ public class UserRepository {
 			User newUser = new User(userId, user);
 			newUser.setUserId(userId++);
 			newUser.setUsername(user);
-			return users.add(newUser);
+			return ((Object) users).add(newUser);
 		}
 	}
 }

@@ -12,15 +12,17 @@ public class UserRepository {
 	Integer userId = 0;
 	HashMap<Integer, String> users = new HashMap<Integer, String>();
 	
-	public int saveUser (Integer userId, String user) {
-		if (users.containsValue(user)) {
+	public User saveUser (Integer userId, String username) {
+		if (users.containsValue(username)) {
 //			return saveUser(userId, user);
-			return user.indexOf(userId);
+			return saveUser(userId, username);
 		} else {
-			User newUser = new User(userId, user);
+			User newUser = new User(userId, username);
 			newUser.setUserId(userId++);
-			newUser.setUsername(user);
-			return ((Object) users).add(newUser);
+			newUser.setUsername(username);
+			users.put(userId, username);
+//			return ((Object) users).add(newUser);
+			return newUser;
 		}
 	}
 }

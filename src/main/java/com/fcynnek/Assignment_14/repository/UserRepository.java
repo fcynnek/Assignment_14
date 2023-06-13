@@ -12,10 +12,10 @@ public class UserRepository {
 	Integer userId = 0;
 	HashMap<Integer, String> users = new HashMap<Integer, String>();
 	
-	public User saveUser (Integer userId, String username) {
+	public User saveUser (String username) {
 		if (users.containsValue(username)) {
 //			return saveUser(userId, user);
-			return saveUser(userId, username);
+			return saveUser(username);
 		} else {
 			User newUser = new User(userId, username);
 			newUser.setUserId(userId++);

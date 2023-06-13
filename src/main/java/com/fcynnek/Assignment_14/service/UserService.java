@@ -7,15 +7,16 @@ import com.fcynnek.Assignment_14.repository.UserRepository;
 
 public class UserService {
 	
-	Integer userId = 0;
+//	Integer userId = 0;
 	
-	@Bean
+//	@Bean
 	private UserRepository userRepo;
 	
-	public User createUser(String name) {
-		User user = new User();
-		user.setUserId(userId++);
-		user.setName(name);
-		return user;
+	public User createUser(String username) {
+//		User user = new User();
+//		user.setUserId(userId++);
+//		user.setName(name);
+//		return user;
+		return userRepo.saveUser(username);
 	}
 }

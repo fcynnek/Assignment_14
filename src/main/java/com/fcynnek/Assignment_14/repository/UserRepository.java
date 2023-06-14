@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.fcynnek.Assignment_14.domain.User;
 
+@Component
 public class UserRepository {
 
 //	private List<User> users = new ArrayList<>();

@@ -26,4 +26,6 @@ public class WelcomeController {
 		model.put("user", user);
 		return "welcome";
 	}
+	
+	
 }

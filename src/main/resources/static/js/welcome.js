@@ -7,3 +7,12 @@ if (user === null) {
     alert('Please input a username')
 } 
 
+document.getElementById('submit').addEventListener('click', function() {
+    var username = document.getElementById('username').value
+    if (username === '') {
+        alert('Please input a username')
+    } else {
+        sessionStorage.setItem('user', username)
+        window.location.href = '/channels'
+    }
+})

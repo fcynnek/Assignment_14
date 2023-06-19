@@ -25,6 +25,7 @@ public class WelcomeController {
 		User user = userService.createUser(username);
 		model.put("user", user);
 		return "welcome";
+//		return "redirect:/channels";
 	}
 	
 	

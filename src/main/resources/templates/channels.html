@@ -2,6 +2,7 @@
 <html xmlns:th="http://thymeleaf.org">
     <head>
         <title>Chats</title>
+        <script src="https://kit.fontawesome.com/5e7463fc0b.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <h2>Channels</h2>
@@ -9,5 +10,7 @@
             <a th:href="@{/channel/{channelName}(channelName=${channel.channelName})}" th:text="${channel.channelName}"></a>
             
         </div>
+        <button id="createChannel">Create New Channel <i class="fa-duotone fa-sparkles"></i></button>
+        <script type="text/javascript" src="/js/channels.js"></script>
     </body>
 </html>

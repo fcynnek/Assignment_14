@@ -18,4 +18,8 @@ public class ChannelService {
 		return channelRepo.findAll();
 	}
 	
+	public Channel createNewChannel() {
+		return new Channel();
+	}
+	
 }

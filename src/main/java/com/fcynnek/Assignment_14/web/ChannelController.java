@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fcynnek.Assignment_14.domain.Channel;
 import com.fcynnek.Assignment_14.service.ChannelService;
@@ -21,5 +22,11 @@ public class ChannelController {
 		List<Channel> channels = channelService.findAll();
 		model.put("channels", channels);
 		return "channels";
+	}
+	
+	@PostMapping("/createChannel")
+	public String createChannel(ModelMap model) {
+		channelService.createNewChannel();
+		return "redirect:/channels";
 	}
 }

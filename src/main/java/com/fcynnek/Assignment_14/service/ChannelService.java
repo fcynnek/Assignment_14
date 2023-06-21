@@ -1,5 +1,6 @@
 package com.fcynnek.Assignment_14.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,16 @@ public class ChannelService {
 	@Autowired
 	private ChannelRepository channelRepo;
 	
-	public List<Channel> findAll() {
+	public HashMap<Integer, String> findAll() {
 		return channelRepo.findAll();
 	}
 	
-	public Channel createNewChannel() {
+	public Channel createNewChannel(Integer channelId, String channelName) {
+		channelRepo.saveChannel(channelId, channelName);
 		return new Channel();
 	}
 	
+	public String findChannelById(Integer channelId) {
+		return channelRepo.findChannelById(channelId);
+	}
 }

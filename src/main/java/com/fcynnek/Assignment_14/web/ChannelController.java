@@ -1,5 +1,6 @@
 package com.fcynnek.Assignment_14.web;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,14 @@ public class ChannelController {
 	
 	@GetMapping("/channels")
 	public String getChannels (ModelMap model) {
-		List<Channel> channels = channelService.findAll();
+		HashMap<Integer, String> channels = channelService.findAll();
 		model.put("channels", channels);
 		return "channels";
 	}
 	
 	@PostMapping("/createChannel")
 	public String createChannel(ModelMap model) {
-		channelService.createNewChannel();
+//		channelService.createNewChannel(null, null);
 		return "redirect:/channels";
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fcynnek.Assignment_14.domain.Channel;
 import com.fcynnek.Assignment_14.service.ChannelService;
@@ -37,8 +38,11 @@ public class ChannelController {
 	
 	
 	@PostMapping("/createChannel")
+//	@ResponseBody
+//	public ResponseEntity<Channel> createChannel(@RequestBody HashMap<String, String> requestBody) {
 	public ResponseEntity<Channel> createChannel(@RequestBody String channelName) {
 		Integer channelId = channelIdCounter++;
+//		String channelName = requestBody.get("channelName");
 		
 		Channel channel = channelService.createNewChannel(channelId, channelName);
 		

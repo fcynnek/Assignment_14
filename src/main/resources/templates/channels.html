@@ -8,7 +8,7 @@
 
 <body>
     <h2>Channels</h2>
-    <div th:each="channel : ${channels}">
+    <div id="channelsContainer" th:each="channel : ${channels}">
         <a th:href="@{/channel/{channelId}(channelId=${channel.channelId})}" th:text="${channel.channelName}"></a>
 
     </div>

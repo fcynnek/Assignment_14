@@ -9,12 +9,13 @@
 <body>
     <h2>Channels</h2>
     <div th:each="channel : ${channels}">
-        <a th:href="@{/channel/{channelName}(channelName=${channel.channelName})}" th:text="${channel.channelName}"></a>
+        <a th:href="@{/channel/{channelId}(channelId=${channel.channelId})}" th:text="${channel.channelName}"></a>
 
     </div>
-    <form action="/createChannel" method="post">
-        <button type="submit" id="createChannel">Create New Channel <i class="fa-duotone fa-sparkles"></i></button>
-    </form>
+    <!-- <form action="/createChannel" method="post"> -->
+        <button id="createChannel">Create New Channel </button>
+        <i class="fa-duotone fa-sparkles"></i>
+    <!-- </form> -->
     <script type="text/javascript" src="/js/channels.js"></script>
 </body>
 

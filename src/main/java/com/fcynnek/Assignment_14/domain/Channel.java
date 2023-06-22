@@ -5,7 +5,9 @@ public class Channel {
 	private Integer channelId;
 	private String channelName;
 	
+
 	
+//	public static Integer nextId;
 	
 	public Integer getChannelId() {
 		return channelId;

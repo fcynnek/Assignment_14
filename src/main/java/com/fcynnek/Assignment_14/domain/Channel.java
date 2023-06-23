@@ -7,8 +7,6 @@ public class Channel {
 	
 
 	
-//	public static Integer nextId;
-	
 	public Integer getChannelId() {
 		return channelId;
 	}

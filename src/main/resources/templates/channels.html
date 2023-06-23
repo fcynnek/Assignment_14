@@ -3,19 +3,17 @@
 
 <head>
     <title>Chats</title>
-    <script src="https://kit.fontawesome.com/5e7463fc0b.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <h2>Channels</h2>
     <div id="channelsContainer" th:each="channel : ${channels}">
-        <a th:href="@{/channel/{channelId}(channelId=${channel.channelId})}" th:text="${channel.channelName}"></a>
+        <a th:href="@{/channels/{channelId}(channelId=${channel.channelId})}" th:text="${channel.channelName}"></a>
 
     </div>
-    <!-- <form action="/createChannel" method="post"> -->
+    <form id="createChannelForm" action="/createChannel" method="post">
         <button id="createChannel">Create New Channel </button>
-        <i class="fa-duotone fa-sparkles"></i>
-    <!-- </form> -->
+    </form>
     <script type="text/javascript" src="/js/channels.js"></script>
 </body>
 

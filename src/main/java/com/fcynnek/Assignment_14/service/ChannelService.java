@@ -20,8 +20,11 @@ public class ChannelService {
 	}
 	
 	public Channel createNewChannel(Integer channelId, String channelName) {
+		Channel channel = new Channel();
+		channel.setChannelId(channelId);
+		channel.setChannelName(channelName);
 		channelRepo.saveChannel(channelId, channelName);
-		return new Channel();
+		return channel;
 	}
 	
 	public String findChannelById(Integer channelId) {

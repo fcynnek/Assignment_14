@@ -21,14 +21,14 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 
-function updateChannelsList(channel) {
-  var channelsContainer = document.getElementById('channelsContainer')
-  var link = document.createElement('a')
-  link.href = '/channel/' + channel.channelId
-  link.innerText = channel.channelName
-  channelsContainer.appendChild(link)
+// function updateChannelsList(channel) {
+//   var channelsContainer = document.getElementById('channelsContainer')
+//   var link = document.createElement('a')
+//   link.href = '/channel/' + channel.channelId
+//   link.innerText = channel.channelName
+//   channelsContainer.appendChild(link)
 
-}
+// }
 
 
 // function createChannel() {

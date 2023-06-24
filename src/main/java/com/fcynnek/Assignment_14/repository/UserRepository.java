@@ -1,9 +1,6 @@
 package com.fcynnek.Assignment_14.repository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import com.fcynnek.Assignment_14.domain.User;
@@ -24,7 +21,6 @@ public class UserRepository {
 			newUser.setUserId(userId++);
 			newUser.setUsername(username);
 			users.put(userId, username);
-//			return ((Object) users).add(newUser);
 			return newUser;
 		}
 	}

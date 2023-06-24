@@ -11,19 +11,24 @@ import com.fcynnek.Assignment_14.domain.Channel;
 @Component
 public class ChannelRepository {
 
-//	List<Channel> channels = new ArrayList<>();
-	HashMap<Integer, String> channels = new HashMap<>();
+	private HashMap<Integer, Channel> channels = new HashMap<>();
 	
-	public HashMap<Integer, String> findAll() {
-		return channels;
+//	public HashMap<Integer, Channel> findAll() {
+//		return channels;
+//	}
+	public List<Channel> findAll() {
+		return new ArrayList<>(channels.values());
 	}
 	
-	public String saveChannel(Integer channelId, String channelName) {
-		String newChannel = channels.put(channelId, channelName);
-		return newChannel;
+	public Channel saveChannel(Integer channelId, String channelName) {
+		Channel channel = new Channel();
+		channel.setChannelId(channelId);
+		channel.setChannelName(channelName);
+		channels.put(channelId, channel);
+		return channel;
 	}
 	
-	public String findChannelById (Integer channelId) {
+	public Channel findChannelById (Integer channelId) {
 		return channels.get(channelId);
 	}
 }

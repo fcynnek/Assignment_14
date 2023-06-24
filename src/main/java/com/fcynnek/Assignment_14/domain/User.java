@@ -12,8 +12,6 @@ public class User {
 		this.userId = userId;
 		this.username = username;
 	}
-	
-	
 	public Integer getUserId() {
 		return userId;
 	}
@@ -27,6 +25,5 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
 	
 }

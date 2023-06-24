@@ -2,6 +2,8 @@ package com.fcynnek.Assignment_14.web;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,17 +28,25 @@ public class ChannelController {
 
 	@GetMapping("/channels")
 	public String getChannels (ModelMap model) {
-		HashMap<Integer, String> channels = channelService.findAll();
-		model.put("channels", channels);
+		List<Channel> channels = channelService.findAll();
+//		HashMap<Integer, Channel> channels = new HashMap<>();
+		for (Channel channel : channelService.findAll() ) {
+			channels.add(channel);
+		}
+//		model.put("channels", channels);
+		model.addAttribute("channels", channels);
 		return "channels";
 	}
 	
 
 	@PostMapping("/createChannel")
-	public String createChannel(@RequestBody String channelName) {
-//	public String createChannel(@RequestParam("channelName") String channelName) {
+//	public String createChannel(@RequestBody String channelName) {
+	public String createChannel(@RequestParam("channelName") String channelName) {
 		Integer channelId = channelIdCounter++;
-		
+//		String channelId = UUID.randomUUID().toString();
+		Channel channel = new Channel();
+		channel.setChannelId(channelId);
+		channel.setChannelName(channelName);
 		channelService.createNewChannel(channelId, channelName);
 		return "redirect:/channels";
 	}

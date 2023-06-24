@@ -15,7 +15,10 @@ public class ChannelService {
 	@Autowired
 	private ChannelRepository channelRepo;
 	
-	public HashMap<Integer, String> findAll() {
+//	public HashMap<Integer,Channel> findAll() {
+//		return channelRepo.findAll();
+//	}
+	public List<Channel> findAll() {
 		return channelRepo.findAll();
 	}
 	
@@ -27,7 +30,7 @@ public class ChannelService {
 		return channel;
 	}
 	
-	public String findChannelById(Integer channelId) {
+	public Channel findChannelById(Integer channelId) {
 		return channelRepo.findChannelById(channelId);
 	}
 

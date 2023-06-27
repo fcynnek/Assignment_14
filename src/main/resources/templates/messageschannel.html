@@ -4,7 +4,13 @@
         <title>[[${channel.channelName}]]</title>
     </head>
     <body>
-
+        <form>
+            <div id="messageContainer" th:each="message : ${channel.messages}">
+                <p th:text="${message.username + ': ' + message.message}"></p>
+            </div>
+            <input type="text" id="messageInput"/>
+            <button onclick="sendMessage()">Send</button>
+        </form>
 
         <script type="text/javascript" src="/js/messageschannel.js"></script>
     </body>

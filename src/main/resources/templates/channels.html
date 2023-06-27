@@ -7,10 +7,16 @@
 
 <body>
     <h2>Channels</h2>
-    <div id="channelsContainer" th:each="channel : ${channels}">
-        <a th:href="@{/channels/{channelId}(channelId=${channel.channelId})}" th:text="${channel.channelName}"></a>
-
-    </div>
+    <table>
+        <tr id="channelsContainer" th:each="channel : ${channels}">
+            <!-- <div -->
+            <td>
+                <a th:href="@{/channels/{channelId}(channelId=${channel.channelId})}">[[${channel.channelName}]]</a>
+                    <!-- th:text="${channel.channelName}"></a> -->
+            </td>
+            <!-- </div> -->
+        </tr>
+    </table>
     <form id="createChannelForm" action="/createChannel" method="post">
         <button id="createChannel">Create New Channel </button>
     </form>

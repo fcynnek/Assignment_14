@@ -21,5 +21,10 @@ public class MessageService {
 	public List<Message> getMessages(Integer channelId) {
 		return messageRepo.findAllMessages(channelId);
 	}
+
+	public void createMessage(Message message) {
+		List<Message> existingMessages = channelRepo.findAllMessage)
+		
+	}
 	
 }

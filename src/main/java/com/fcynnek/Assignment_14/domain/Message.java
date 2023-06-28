@@ -6,7 +6,7 @@ public class Message {
 	private String message;
 	private User user;
 	private Channel channel;
-	private Channel channelId;
+//	private Channel channelId;
 	
 	
 	public Integer getMessageId() {
@@ -36,12 +36,12 @@ public class Message {
 	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
-	public Channel getChannelId() {
-		return channelId;
-	}
-	public void setChannelId(Channel channelId) {
-		this.channelId = channelId;
-	}
+//	public Channel getChannelId() {
+//		return channelId;
+//	}
+//	public void setChannelId(Integer channelId) {
+//		this.channelId = channelId;
+//	}
 	
 	
 }

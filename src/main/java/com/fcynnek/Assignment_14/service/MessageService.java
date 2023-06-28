@@ -19,11 +19,11 @@ public class MessageService {
 	@Autowired
 	private ChannelRepository channelRepo;
 	
-	public List<Message> getMessages(Channel channelId) {
+	public List<Message> getMessages(Integer channelId) {
 		return messageRepo.findAllMessages(channelId);
 	}
 
-	public void createMessage(Message message, Channel channelId) {
+	public void createMessage(Message message, Integer channelId) {
 		List<Message> existingMessages = getMessages(channelId);
 		existingMessages.add(message);
 	}

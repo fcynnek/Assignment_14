@@ -13,7 +13,7 @@ public class MessageRepository {
 
 	private HashMap<Integer, List<Message>> messages = new HashMap<>();
 	
-	public List<Message> findAllMessages (Channel channelId) {
+	public List<Message> findAllMessages (Integer channelId) {
 		List<Message> messagesByChannel = messages.get(channelId);
 		return messagesByChannel;
 	}

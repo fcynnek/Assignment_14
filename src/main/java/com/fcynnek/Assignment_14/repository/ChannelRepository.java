@@ -28,7 +28,7 @@ public class ChannelRepository {
 		return channel;
 	}
 	
-	public Channel findChannelById (Channel channelId) {
+	public Channel findChannelById (Integer channelId) {
 		return channels.get(channelId);
 	}
 }

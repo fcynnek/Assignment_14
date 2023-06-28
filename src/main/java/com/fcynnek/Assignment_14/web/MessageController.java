@@ -27,7 +27,7 @@ public class MessageController {
 	private ChannelService channelService;
 	
 	@GetMapping("/messages")
-	public List<Message> getMessages(@PathVariable Channel channelId, ModelMap model) {
+	public List<Message> getMessages(@PathVariable Integer channelId, ModelMap model) {
 		Channel channel = channelService.findChannelById(channelId);
 		model.put("channel", channel);
 		List<Message> channelMessages = messageService.getMessages(channelId);
@@ -37,7 +37,7 @@ public class MessageController {
 	@PostMapping("/messages")
 	@ResponseBody
 //	public Message createMessage(@RequestBody Message message, Integer channelId) {
-	public Message createMessage(@RequestBody String message, Channel channelId) {
+	public Message createMessage(@RequestBody String message, Integer channelId) {
 //        messageService.createMessage(message, channelId);
 //		Gson gson = new Gson();
 //		String jsonMessage = gson.toJson(message);
@@ -45,7 +45,7 @@ public class MessageController {
 //        return jsonMessage;
 		Message newMessage = new Message();
 		newMessage.setMessage(message);
-		newMessage.setChannelId(channelId);
+//		newMessage.setChannelId(channelId);
 		messageService.createMessage(newMessage, channelId);
 		return newMessage;
     }

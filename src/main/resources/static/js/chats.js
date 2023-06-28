@@ -22,6 +22,6 @@ function sendMessage() {
             console.log(responseJson)
         })
 }
-// setInterval(function () {
-//     $('#messages').load('http://localhost:8080/messages')
-// }, 500)
+setInterval(function () {
+    $('#messages').load('http://localhost:8080/messages')
+}, 500)

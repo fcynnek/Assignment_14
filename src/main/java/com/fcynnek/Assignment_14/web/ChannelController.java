@@ -41,6 +41,7 @@ public class ChannelController {
 	
 
 	@PostMapping("/createChannel")
+//	@ResponseBody
 //	public String createChannel(@RequestBody String channelName) {
 	public String createChannel(@RequestParam("channelName") String channelName) {
 		Integer channelId = channelIdCounter++;
@@ -50,13 +51,14 @@ public class ChannelController {
 		channel.setChannelName(channelName);
 		channelService.createNewChannel(channelId, channelName);
 		return "redirect:/channels";
+//		return channel.toString();
 	}
 	
 	@GetMapping("/channels/{channelId}")
-	public String getSingleChannel(@PathVariable Integer channelId, ModelMap model) {
+	public String getSingleChannel(@PathVariable Channel channelId, ModelMap model) {
 		Channel channel = channelService.findChannelById(channelId);
 		model.put("channel", channel);
-		return "messageschannel";
+		return "chats";
 	}
 	
 }

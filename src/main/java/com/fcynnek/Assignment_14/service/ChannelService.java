@@ -30,7 +30,7 @@ public class ChannelService {
 		return channel;
 	}
 	
-	public Channel findChannelById(Integer channelId) {
+	public Channel findChannelById(Channel channelId) {
 		return channelRepo.findChannelById(channelId);
 	}
 

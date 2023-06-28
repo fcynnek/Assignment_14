@@ -26,13 +26,21 @@ public class MessageController {
 	@Autowired
 	private ChannelService channelService;
 	
-	@GetMapping("/messages")
-	public List<Message> getMessages(@PathVariable Integer channelId, ModelMap model) {
+//	@GetMapping("/messages")
+//	public List<Message> getMessages(@PathVariable Integer channelId, ModelMap model) {
+//		Channel channel = channelService.findChannelById(channelId);
+//		model.put("channel", channel);
+//		List<Message> channelMessages = messageService.getMessages(channelId);
+//        return channelMessages;
+//    }
+	
+	@GetMapping("/channels/{channelId}")
+	public String getSingleChannel(@PathVariable Integer channelId, ModelMap model) {
 		Channel channel = channelService.findChannelById(channelId);
-		model.put("channel", channel);
 		List<Message> channelMessages = messageService.getMessages(channelId);
-        return channelMessages;
-    }
+		model.put("channel", channel);
+		return "chats";
+	}
 	
 	@PostMapping("/messages")
 	@ResponseBody

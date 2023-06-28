@@ -54,11 +54,11 @@ public class ChannelController {
 //		return channel.toString();
 	}
 	
-	@GetMapping("/channels/{channelId}")
-	public String getSingleChannel(@PathVariable Integer channelId, ModelMap model) {
-		Channel channel = channelService.findChannelById(channelId);
-		model.put("channel", channel);
-		return "chats";
-	}
+//	@GetMapping("/channels/{channelId}")
+//	public String getSingleChannel(@PathVariable Integer channelId, ModelMap model) {
+//		Channel channel = channelService.findChannelById(channelId);
+//		model.put("channel", channel);
+//		return "chats";
+//	}
 	
 }

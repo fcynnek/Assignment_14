@@ -42,7 +42,8 @@ public class MessageController {
 		return "chats";
 	}
 	
-	@PostMapping("/messages")
+//	@PostMapping("/messages")
+	@PostMapping("/channels/{channelId}")
 	@ResponseBody
 //	public Message createMessage(@RequestBody Message message, Integer channelId) {
 	public Message createMessage(@RequestBody String message, Integer channelId) {

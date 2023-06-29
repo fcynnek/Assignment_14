@@ -1,13 +1,13 @@
+// var channelId = document.getElementById("channelId").value
+var messageBox = document.getElementById("messageInput")
+var message = {
+    // "channelId": channelId,
+    "message": messageBox.value,
+    "user": sessionStorage.getItem("username")
+}
 function sendMessage() {
-    // var channelId = document.getElementById("channelId").value
-    var messageBox = document.getElementById("messageInput")
-    var message = {
-        // "channelId": channelId,
-        "message": messageBox.value,
-        "user": sessionStorage.getItem("username")
-    }
     console.log(JSON.stringify(message))
-    fetch('http://localhost:8080/messages', {
+    fetch('http://localhost:8080/channels/' + channelId, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -23,5 +23,12 @@ function sendMessage() {
         })
 }
 setInterval(function () {
-    $('#messages').load('http://localhost:8080/messages')
-}, 500)
+    (message).load('http://localhost:8080/channels/' + channelId)
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+}, 500);

@@ -3,11 +3,11 @@ var messageBox = document.getElementById("messageInput");
 function sendMessage() {
     var channelId = document.getElementById("channelId").value; // Retrieve the latest channelId value
     var message = {
-        "message": messageBox.value,
-        "user": sessionStorage.getItem("username")
+        "user": sessionStorage.getItem("user"),
+        "message": messageBox.value
     };
 
-    console.log(JSON.stringify(message));
+    console.log(JSON.stringify(message)); // Log the message to the console to check for value
 
     fetch('http://localhost:8080/channels/' + channelId, {
         method: "POST",
@@ -18,7 +18,7 @@ function sendMessage() {
     })
     .then((response) => {
         console.log(response);
-        // return response.json();
+        return response.json();
     })
     .then((responseJson) => {
         console.log(responseJson);
@@ -38,8 +38,7 @@ setInterval(function () {
     fetch('http://localhost:8080/channels/' + channelId)
     .then((response) => response.json())
     .then((data) => {
-        console.log(data);
-        // Process the received data, update the message container, etc.
+        console.log(data); // Process the received data, update the message container, etc.
     })
     .catch((error) => {
         console.error(error);

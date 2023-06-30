@@ -8,11 +8,11 @@ if (user === null) {
 } 
 
 document.getElementById('submit').addEventListener('click', function() {
-    var username = document.getElementById('username').value
-    if (username === '') {
+    var user = document.getElementById('user').value
+    if (user === '') {
         alert('Please input a username')
     } else {
-        sessionStorage.setItem('user', username)
+        sessionStorage.setItem('user', user)
         window.location.href = '/channels'
     }
 })

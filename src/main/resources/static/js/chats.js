@@ -1,12 +1,14 @@
-// var channelId = document.getElementById("channelId").value
-var messageBox = document.getElementById("messageInput")
-var message = {
-    // "channelId": channelId,
-    "message": messageBox.value,
-    "user": sessionStorage.getItem("username")
-}
+var messageBox = document.getElementById("messageInput");
+
 function sendMessage() {
-    console.log(JSON.stringify(message))
+    var channelId = document.getElementById("channelId").value; // Retrieve the latest channelId value
+    var message = {
+        "message": messageBox.value,
+        "user": sessionStorage.getItem("username")
+    };
+
+    console.log(JSON.stringify(message));
+
     fetch('http://localhost:8080/channels/' + channelId, {
         method: "POST",
         headers: {
@@ -14,19 +16,30 @@ function sendMessage() {
         },
         body: JSON.stringify(message)
     })
-        .then((response) => {
-            console.log(response)
-            // return response.json()
-        })
-        .then((responseJson) => {
-            console.log(responseJson)
-        })
+    .then((response) => {
+        console.log(response);
+        // return response.json();
+    })
+    .then((responseJson) => {
+        console.log(responseJson);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+
+    messageBox.value = ""; // Clear the message input field
 }
+
+document.getElementById("sendMessage").addEventListener("click", sendMessage);
+
 setInterval(function () {
-    (message).load('http://localhost:8080/channels/' + channelId)
+    var channelId = document.getElementById("channelId").value; // Retrieve the latest channelId value
+
+    fetch('http://localhost:8080/channels/' + channelId)
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
+        // Process the received data, update the message container, etc.
     })
     .catch((error) => {
         console.error(error);

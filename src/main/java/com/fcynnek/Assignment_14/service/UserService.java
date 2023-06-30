@@ -22,4 +22,9 @@ public class UserService {
 //		return user;
 		return userRepo.saveUser(username);
 	}
+
+	public String findUserById(Integer userId) {
+		return userRepo.findUserById(userId);
+//		return null;
+	}
 }

@@ -30,35 +30,19 @@ public class ChannelController {
 	@GetMapping("/channels")
 	public String getChannels (ModelMap model) {
 		List<Channel> channels = channelService.findAll();
-//		HashMap<Integer, Channel> channels = new HashMap<>();
-//		for (Channel channel : channelService.findAll() ) {
-//			channels.add(channel);
-//		}
-//		model.put("channels", channels);
 		model.addAttribute("channels", channels);
 		return "channels";
 	}
 	
 
 	@PostMapping("/createChannel")
-//	@ResponseBody
-//	public String createChannel(@RequestBody String channelName) {
 	public String createChannel(@RequestParam("channelName") String channelName) {
 		Integer channelId = channelIdCounter++;
-//		String channelId = UUID.randomUUID().toString();
 		Channel channel = new Channel();
 		channel.setChannelId(channelId);
 		channel.setChannelName(channelName);
 		channelService.createNewChannel(channelId, channelName);
 		return "redirect:/channels";
-//		return channel.toString();
 	}
-	
-//	@GetMapping("/channels/{channelId}")
-//	public String getSingleChannel(@PathVariable Integer channelId, ModelMap model) {
-//		Channel channel = channelService.findChannelById(channelId);
-//		model.put("channel", channel);
-//		return "chats";
-//	}
 	
 }

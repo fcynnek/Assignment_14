@@ -24,4 +24,9 @@ public class UserRepository {
 			return newUser;
 		}
 	}
+
+	public String findUserById(Integer userId) {
+		
+		return users.get(userId);
+	}
 }

@@ -2,7 +2,12 @@ package com.fcynnek.Assignment_14.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,37 +30,40 @@ public class MessageController {
 	
 	@Autowired
 	private ChannelService channelService;
-	
-//	@GetMapping("/messages")
-//	public List<Message> getMessages(@PathVariable Integer channelId, ModelMap model) {
-//		Channel channel = channelService.findChannelById(channelId);
-//		model.put("channel", channel);
-//		List<Message> channelMessages = messageService.getMessages(channelId);
-//        return channelMessages;
-//    }
+
 	
 	@GetMapping("/channels/{channelId}")
-	public String getSingleChannel(@PathVariable Integer channelId, ModelMap model) {
+	public String getMessages(@PathVariable Integer channelId, ModelMap model, HttpSession session) {
+	
 		Channel channel = channelService.findChannelById(channelId);
 		List<Message> channelMessages = messageService.getMessages(channelId);
+		session.setAttribute("channel", channel);
+		session.setAttribute("channelMessages", channelMessages);
+		
 		model.put("channel", channel);
+		model.put("channelMessages", channelMessages);
+		
 		return "chats";
 	}
 	
-//	@PostMapping("/messages")
+	
 	@PostMapping("/channels/{channelId}")
 	@ResponseBody
 //	public Message createMessage(@RequestBody Message message, Integer channelId) {
-	public Message createMessage(@RequestBody String message, Integer channelId) {
-//        messageService.createMessage(message, channelId);
-//		Gson gson = new Gson();
-//		String jsonMessage = gson.toJson(message);
-//		System.out.println(message);
-//        return jsonMessage;
+//	public Message createMessage(@RequestBody String message, Integer channelId) {
+	public ResponseEntity<String> createMessage(@RequestBody String message, @PathVariable Integer channelId, HttpSession session) {
 		Message newMessage = new Message();
 		newMessage.setMessage(message);
-//		newMessage.setChannelId(channelId);
 		messageService.createMessage(newMessage, channelId);
-		return newMessage;
+		
+		Channel channel = (Channel) session.getAttribute("channel");
+		List<Message> channelMessages = (List<Message>) session.getAttribute("channelMessages");
+		
+		Gson gson = new Gson();
+		String jsonMessage = gson.toJson(newMessage);
+		
+		return ResponseEntity.status(HttpStatus.CREATED)
+	            .contentType(MediaType.APPLICATION_JSON)
+	            .body(jsonMessage);
     }
 }

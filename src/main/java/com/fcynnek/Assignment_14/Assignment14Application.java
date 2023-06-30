@@ -10,4 +10,11 @@ public class Assignment14Application {
 		SpringApplication.run(Assignment14Application.class, args);
 	}
 
+	/*
+	 * session storage for messages
+	 *local storage for users
+	 *async await instead of fetch and await
+	 *not use thymeleaf use js instead to create the website
+	 *Consume and push the data in the fetch/poll
+	 */
 }

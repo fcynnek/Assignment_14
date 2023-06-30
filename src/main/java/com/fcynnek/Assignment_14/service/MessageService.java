@@ -35,7 +35,7 @@ public class MessageService {
 //	        User user = new User(userId, displayName);
 //	        user.setUsername(displayName);
 	        
-//	        message.setUser(user); // Set the user object on the message
+//	        message.setUser(user); 
 	        existingMessages.add(message);
 	        channel.setMessages(existingMessages);
 	    }

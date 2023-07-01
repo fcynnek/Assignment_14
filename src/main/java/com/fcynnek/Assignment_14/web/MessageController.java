@@ -49,8 +49,6 @@ public class MessageController {
 	
 	@PostMapping("/channels/{channelId}")
 	@ResponseBody
-//	public Message createMessage(@RequestBody Message message, Integer channelId) {
-//	public Message createMessage(@RequestBody String message, Integer channelId) {
 	public ResponseEntity<String> createMessage(@RequestBody String message, @PathVariable Integer channelId, HttpSession session) {
 		Message newMessage = new Message();
 		newMessage.setMessage(message);

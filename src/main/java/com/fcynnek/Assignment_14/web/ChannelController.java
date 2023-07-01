@@ -30,7 +30,11 @@ public class ChannelController {
 	@GetMapping("/channels")
 	public String getChannels (ModelMap model) {
 		List<Channel> channels = channelService.findAll();
-		model.addAttribute("channels", channels);
+		model.put("channels", channels);
+		
+		if (channels.isEmpty()) {
+			model.addAttribute("noChannels", true);
+		}
 		return "channels";
 	}
 	

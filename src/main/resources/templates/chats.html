@@ -2,17 +2,16 @@
 <html xmlns:th="http://thymeleaf.org">
 
 <head>
-    <!-- <title>[[${channel.channelName}]]</title> -->
-    <title th:text="${channel.channelName}"></title>
+    <title th:text="${channel?.channelName}"></title>
 </head>
 
 <body>
     <form>
-        <div id="messageContainer" th:each="message : ${channel.messages}">
+        <div id="messageContainer" th:each="message : ${channelMessages}">
             <p th:text="${message.user + ': ' + message.message}"></p>
             <p th:text="${message}"></p>
         </div>
-        <input type="hidden" id="channelId" th:value="${channel.channelId}" />
+        <input type="hidden" id="channelId" th:value="${channel?.channelId}" />
         <input type="text" id="messageInput" />
         <button id="sendMessage" onclick="sendMessage()">Send</button>
     </form>

@@ -14,18 +14,35 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function pollMessages() {
+        if (!channelId) {
+            console.error('Invalid channelId');
+            return;
+        }
+    
         fetch(`/channels/${channelId}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to retrieve messages. Status: ${response.status} ${response.statusText}`);
+                }
+                // Check if the response body is empty
+                if (response.status === 204) {
+                    return []; // Return an empty array
+                }
+                return response.text(); // Read the response body as text
+            })
             .then(data => {
+                console.log(data); // Log the response body
                 messageContainer.innerHTML = '';
-                data.forEach(message => {
+                // Parse the response body as JSON
+                const jsonData = JSON.parse(data);
+                jsonData.forEach(message => {
                     displayMessage(message.username, message.content);
                 });
             })
             .catch(error => {
                 console.error('An error occurred while retrieving messages', error);
             });
-    }
+    }    
 
     function sendMessage(event) {
         event.preventDefault();

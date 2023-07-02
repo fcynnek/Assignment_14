@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   var addChannelButton = document.getElementById('addChannelButton');
   var channelsContainer = document.getElementById('channelsContainer');
-  var channelIdCounter = 1;
+  var channelIdCounter = sessionStorage.getItem('channelIdCounter') || 1;
 
   addChannelButton.addEventListener('click', function () {
     var channelName = prompt("Enter channel name:");
@@ -16,7 +16,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var newChannelLink = document.createElement('a');
     newChannelLink.textContent = channelName;
     newChannelLink.href = '/channels/' + channelId;
+    newChannelLink.addEventListener('click', function () {
+      sessionStorage.setItem('channelId', channelId);
+    });
     newChannelElement.appendChild(newChannelLink);
     channelsContainer.prepend(newChannelElement);
   }
+
 });

@@ -42,9 +42,9 @@ public class ChannelController {
 	@PostMapping("/createChannel")
 	public String createChannel(@RequestParam("channelName") String channelName) {
 		Integer channelId = channelIdCounter++;
-		Channel channel = new Channel();
-		channel.setChannelId(channelId);
-		channel.setChannelName(channelName);
+//		Channel channel = new Channel();
+//		channel.setChannelId(channelId);
+//		channel.setChannelName(channelName);
 		channelService.createNewChannel(channelId, channelName);
 		return "redirect:/channels";
 	}

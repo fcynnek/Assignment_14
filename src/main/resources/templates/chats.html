@@ -6,12 +6,12 @@
 </head>
 
 <body>
-    <h2>Chat Room</h2>
+    <h2>Messages from the chat room</h2>
     <div id="messageContainer"></div>
     <form id="sendMessageForm" action="/channels/{{channelId}}/sendMessage" method="post">
         <input type="hidden" id="channelId" value="{{channelId}}" />
-        <input type="text" id="sendMessage" placeholder="Enter your message" />
-        <button type="submit">Send</button>
+        <input type="text" id="messageInput" placeholder="Enter your message" />
+        <button type="submit">Send</button> <button><a href="/channels/">Go back</a></button>
     </form>
     <script type="text/javascript" src="/js/chats.js"></script>
 </body>

@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fcynnek.Assignment_14.domain.Message;
+import com.fcynnek.Assignment_14.service.ChannelService;
 import com.fcynnek.Assignment_14.service.MessageService;
 
 @Controller
 public class MessageController {
 
+	@Autowired
     private MessageService messageService;
+	
+	@Autowired
+	private ChannelService channelService;
 
     @Autowired
     public MessageController(MessageService messageService) {

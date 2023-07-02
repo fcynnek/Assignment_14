@@ -1,18 +1,18 @@
 var messageIcon = document.querySelector('.fa-message-smile')
 var submitIcon = document.querySelector('.fa-paper-plane')
 var messageInput = document.querySelector('.message-input')
-var user = sessionStorage.getItem('user')
+var username = sessionStorage.getItem('username')
 
-if (user === null) {
+if (username === null) {
     alert('Please input a username')
 } 
 
 document.getElementById('submit').addEventListener('click', function() {
-    var user = document.getElementById('user').value
-    if (user === '') {
+    var username = document.getElementById('username').value
+    if (username === '') {
         alert('Please input a username')
     } else {
-        sessionStorage.setItem('user', user)
+        sessionStorage.setItem('username', username)
         window.location.href = '/channels'
     }
 })

@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Invalid channelId');
             return;
         }
-    
+
         fetch(`/channels/${channelId}`)
             .then(response => {
                 if (!response.ok) {
@@ -34,15 +34,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(data); // Log the response body
                 messageContainer.innerHTML = '';
                 // Parse the response body as JSON
-                const jsonData = JSON.parse(data);
-                jsonData.forEach(message => {
-                    displayMessage(message.username, message.content);
-                });
+                const jsonData = JSON.parse(data, { throws: true });
+
+                if (jsonData === null) {
+                    console.error('The response body is not valid JSON');
+                } else {
+                    jsonData.forEach(message => {
+                        displayMessage(message.username, message.content);
+                    });
+                }
+
             })
             .catch(error => {
                 console.error('An error occurred while retrieving messages', error);
             });
-    }    
+    }
 
     function sendMessage(event) {
         event.preventDefault();

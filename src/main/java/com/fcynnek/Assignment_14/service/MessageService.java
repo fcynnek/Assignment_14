@@ -34,11 +34,6 @@ public class MessageService {
 	    Channel channel = channelRepo.findChannelById(channelId);
 	    if (channel != null) {
 	        List<Message> existingMessages = channel.getMessages();
-	        
-//	        User user = new User(userId, displayName);
-//	        user.setUsername(displayName);
-	        
-//	        message.setUser(user); 
 	        existingMessages.add(message);
 	        channel.setMessages(existingMessages);
 	    }

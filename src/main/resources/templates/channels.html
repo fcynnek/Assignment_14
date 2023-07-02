@@ -1,34 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html>
 
 <head>
     <title>Chats</title>
+    <script type="text/javascript" src="/js/channels.js"></script>
 </head>
 
 <body>
     <h2>Channels</h2>
-    <div th:if="${noChannels}">
-        <form id="noChannelsForm" action="/createChannel" method="post">
-            <p>No channels found. <button id="createChannel" onclick="createChannel()">Create New Channel </button></p>
-
-        </form>
+    <button id="addChannelButton">Add New Channel</button>
+    <div id="channelsContainer">
+        <!-- Existing channels will be dynamically added here -->
     </div>
-    <div th:unless="${noChannels}">
-    <table>
-        <tr id="channelsContainer" th:each="channel : ${channels}">
-            
-            <td>
-                <a th:href="@{/channels/{channelId}(channelId=${channel.channelId})}" th:text="${channel.channelName}"></a>
-                   
-            </td>
-            
-        </tr>
-    </table>
-    <form id="createChannelForm" action="/createChannel" method="post">
-        <button id="createChannel" onclick="createChannel()">Create New Channel </button>
-    </form>
-    <script type="text/javascript" src="/js/channels.js"></script>
-</div>
 </body>
 
 </html>

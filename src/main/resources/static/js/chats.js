@@ -1,46 +1,66 @@
-var messageBox = document.getElementById("messageInput");
+document.addEventListener('DOMContentLoaded', function () {
+    const sendMessageForm = document.getElementById('sendMessageForm');
+    const messageInput = document.getElementById('messageInput');
+    const messageContainer = document.getElementById('messageContainer');
 
-function sendMessage() {
-    var channelId = document.getElementById("channelId").value; // Retrieve the latest channelId value
-    var message = {
-        "user": sessionStorage.getItem("user"),
-        "message": messageBox.value
-    };
+    const channelId = sessionStorage.getItem('channelId');
 
-    console.log(JSON.stringify(message)); // Log the message to the console to check for value
+    function displayMessage(username, content) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.textContent = `${username}: ${content}`;
 
-    fetch('http://localhost:8080/channels/' + channelId, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(message)
-    })
-    .then((response) => {
-        console.log(response);
-        return response.json();
-    })
-    .then((responseJson) => {
-        console.log(responseJson);
-    })
-    .catch((error) => {
-        console.error(error);
-    });
+        messageContainer.appendChild(messageElement);
+    }
 
-    messageBox.value = ""; // Clear the message input field
-}
+    function pollMessages() {
+        fetch(`/channels/${channelId}`)
+            .then(response => response.json())
+            .then(data => {
+                messageContainer.innerHTML = '';
+                data.forEach(message => {
+                    displayMessage(message.username, message.content);
+                });
+            })
+            .catch(error => {
+                console.error('An error occurred while retrieving messages', error);
+            });
+    }
 
-document.getElementById("sendMessage").addEventListener("click", sendMessage);
+    function sendMessage(event) {
+        event.preventDefault();
+        const content = messageInput.value.trim();
 
-setInterval(function () {
-    var channelId = document.getElementById("channelId").value; // Retrieve the latest channelId value
+        if (content) {
+            const message = {
+                content: content
+            };
 
-    fetch('http://localhost:8080/channels/' + channelId)
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data); // Process the received data, update the message container, etc.
-    })
-    .catch((error) => {
-        console.error(error);
-    });
-}, 500);
+            fetch(`/channels/${channelId}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(message)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        messageInput.value = '';
+                        pollMessages();
+                    } else {
+                        console.error('Failed to send message');
+                    }
+                })
+                .catch(error => {
+                    console.error('An error occurred while sending the message', error);
+                });
+        }
+    }
+
+    if (sendMessageForm) {
+        sendMessageForm.addEventListener('submit', sendMessage);
+    }
+
+    pollMessages();
+    setInterval(pollMessages, 500);
+});

@@ -1,44 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html>
 
 <head>
-    <title th:text="${channel?.channelName}"></title>
+    <title>Chat Room</title>
 </head>
 
 <body>
-    <form>
-        <div id="messageContainer" th:each="message : ${channelMessages}">
-            <p th:text="${message.user + ': ' + message.message}"></p>
-            <p th:text="${message}"></p>
-        </div>
-        <input type="hidden" id="channelId" th:value="${channel?.channelId}" />
-        <input type="text" id="messageInput" />
-        <button id="sendMessage" onclick="sendMessage()">Send</button>
+    <h2>Chat Room</h2>
+    <div id="messageContainer"></div>
+    <form id="sendMessageForm" action="/channels/{{channelId}}/sendMessage" method="post">
+        <input type="hidden" id="channelId" value="{{channelId}}" />
+        <input type="text" id="sendMessage" placeholder="Enter your message" />
+        <button type="submit">Send</button>
     </form>
-    <script>
-        var channel = {
-            channelName: "${channel.channelName}",
-            messages: []
-        }
-        document.getElementById("sendMessage").addEventListener("click", function () {
-            var messageInput = document.getElementById("messageInput");
-            var message = messageInput.value;
-
-            // Create a new paragraph element
-            var newMessageElement = document.createElement("p");
-            newMessageElement.textContent = message;
-
-            // Append the new message to the message container
-            var messageContainer = document.getElementById("messageContainer");
-            messageContainer.appendChild(newMessageElement);
-
-            // Clear the message input field
-            messageInput.value = "";
-
-            // Store the message in the channel object
-            channel.messages.push(message);
-        });
-    </script>
     <script type="text/javascript" src="/js/chats.js"></script>
 </body>
 

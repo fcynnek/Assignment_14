@@ -1,5 +1,6 @@
 package com.fcynnek.Assignment_14.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class MessageService {
 	@Autowired
 	private UserService userService;
 	
+	private List<Message> messages = new ArrayList<>();
+	
 	public List<Message> getMessages(Integer channelId) {
 		return messageRepo.findAllMessages(channelId);
 	}
@@ -39,6 +42,14 @@ public class MessageService {
 	        existingMessages.add(message);
 	        channel.setMessages(existingMessages);
 	    }
+	}
+
+	public List<Message> findAll() {
+		return messages;
+	}
+
+	public void save(Message message) {
+		messages.add(message);
 	}
 
 	

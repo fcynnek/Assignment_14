@@ -1,32 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
-  function createChannel(event) {
-    event.preventDefault();
-    var channelName = prompt("Enter channel name: ");
+  var addChannelButton = document.getElementById('addChannelButton');
+  var channelsContainer = document.getElementById('channelsContainer');
+  var channelIdCounter = 1;
+
+  addChannelButton.addEventListener('click', function () {
+    var channelName = prompt("Enter channel name:");
     if (channelName) {
-      var form = document.createElement('form');
-      form.method = 'POST';
-      form.action = '/createChannel';
-
-      var input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = 'channelName';
-      input.value = channelName;
-
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();
+      createChannel(channelName);
     }
-  }
+  });
 
-  var createChannelButton = document.getElementById('createChannel');
-  if (createChannelButton) {
-    createChannelButton.addEventListener('click', createChannel);
-  }
-
-  var noChannelsForm = document.getElementById('noChannelsForm');
-  if (noChannelsForm) {
-    noChannelsForm.addEventListener('submit', function (event) {
-      createChannel(event); // Call the createChannel function
-    });
+  function createChannel(channelName) {
+    var channelId = channelIdCounter++;
+    var newChannelElement = document.createElement('div');
+    var newChannelLink = document.createElement('a');
+    newChannelLink.textContent = channelName;
+    newChannelLink.href = '/channels/' + channelId;
+    newChannelElement.appendChild(newChannelLink);
+    channelsContainer.prepend(newChannelElement);
   }
 });

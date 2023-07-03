@@ -16,5 +16,7 @@ public class Assignment14Application {
 	 *async await instead of fetch and await
 	 *not use thymeleaf use js instead to create the website
 	 *Consume and push the data in the fetch/poll
+	 *
+	 *try rest controller and json parser
 	 */
 }

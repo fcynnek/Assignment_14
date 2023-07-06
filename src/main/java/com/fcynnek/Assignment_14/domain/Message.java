@@ -7,6 +7,7 @@ public class Message {
 	private User user;
 	private Channel channel;
 	private Integer channelId;
+	private String username;
 	
 	
 	public Integer getMessageId() {
@@ -41,6 +42,12 @@ public class Message {
 	}
 	public void setChannelId(Integer channelId) {
 		this.channelId = channelId;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

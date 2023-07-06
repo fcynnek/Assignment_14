@@ -16,7 +16,7 @@ import com.fcynnek.Assignment_14.service.ChannelService;
 import com.fcynnek.Assignment_14.service.UserService;
 
 @Controller
-public class WelcomeController {
+public class UserController {
 
 	@Autowired
 	private ChannelService channelService;

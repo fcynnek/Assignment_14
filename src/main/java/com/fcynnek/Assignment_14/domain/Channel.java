@@ -8,10 +8,15 @@ public class Channel {
 	private Integer channelId;
 	private String channelName;
 	private List<Message> messages;
+	private List<User> users;
 
-	
+
 	public Channel() {
+		this.setUsers(new ArrayList<>());
 		this.messages = new ArrayList<>();
+	}
+	public void addUser(User user) {
+		users.add(user);
 	}
 	public Integer getChannelId() {
 		return channelId;
@@ -34,6 +39,12 @@ public class Channel {
 	}
 	public void addMessage(Message message) {
 		this.messages.add(message);
+	}
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 	
 	

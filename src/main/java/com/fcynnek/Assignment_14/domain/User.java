@@ -17,6 +17,9 @@ public class User {
 		this.userId = userId;
 		this.username = username;
 	}
+	public User(String username) {
+		this.username = username;
+	}
 	public Integer getUserId() {
 		return userId;
 	}

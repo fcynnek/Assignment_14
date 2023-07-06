@@ -3,6 +3,7 @@ package com.fcynnek.Assignment_14.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,12 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fcynnek.Assignment_14.domain.Message;
+import com.fcynnek.Assignment_14.domain.MessageResponse;
 import com.fcynnek.Assignment_14.service.ChannelService;
 import com.fcynnek.Assignment_14.service.MessageService;
 
 @Controller
+//@RestController
 public class MessageController {
 
 	@Autowired
@@ -37,7 +41,18 @@ public class MessageController {
         model.addAttribute("messages", messages);
         model.addAttribute("channelId", channelId);
         return "chats";
+//    	return messageService.getMessages(channelId);
     }
+    
+    @GetMapping(value = "/channels/{channelId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Message> getChannelMessagesJson(@PathVariable Integer channelId) {
+        return messageService.getMessages(channelId);
+    }
+
+
+
+
 
     @PostMapping("/channels/{channelId}/sendMessage")
     @ResponseBody

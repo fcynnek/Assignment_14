@@ -1,5 +1,7 @@
 package com.fcynnek.Assignment_14.domain;
 
+import java.util.List;
+
 public class Message {
 
 	private Integer messageId;
@@ -8,6 +10,7 @@ public class Message {
 	private Channel channel;
 	private Integer channelId;
 	private String username;
+	private List<Message> messsages;
 	
 	
 	public Integer getMessageId() {
@@ -48,6 +51,12 @@ public class Message {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public List<Message> getMesssages() {
+		return messsages;
+	}
+	public void setMesssages(List<Message> messsages) {
+		this.messsages = messsages;
 	}
 	
 	

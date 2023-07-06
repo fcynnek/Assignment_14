@@ -7,12 +7,16 @@
 
 <body>
     <h2>Messages from the chat room</h2>
-    <div id="messageContainer"></div>
-    <form id="sendMessageForm" action="/channels/{{channelId}}/sendMessage" method="post">
-        <input type="hidden" id="channelId" value="{{channelId}}" />
-        <input type="text" id="messageInput" placeholder="Enter your message" />
-        <button type="submit">Send</button> <button><a href="/channels/">Go back</a></button>
-    </form>
+    <div class="message-container">
+        <div th:each="message : ${messages}" th:inline="text">
+            <span class="timestamp">[[${message.user.name}]]: </span>
+            <span class="message">[[${message.text}]]</span>
+        </div>
+      </div>
+      <div class="message-box">
+          <textarea id="messageBox"></textarea>
+          <button onclick="sendMessage()">Send</button>
+      </div>
     <script type="text/javascript" src="/js/chats.js"></script>
 </body>
 

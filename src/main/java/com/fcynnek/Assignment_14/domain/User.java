@@ -13,14 +13,14 @@ public class User {
 	
 	
 	
-	public User(Integer userId, String username) {
-		super();
-		this.userId = userId;
-		this.username = username;
-	}
-	public User(String username) {
-		this.username = username;
-	}
+//	public User(Integer userId, String username) {
+//		super();
+//		this.userId = userId;
+//		this.username = username;
+//	}
+//	public User(String username) {
+//		this.username = username;
+//	}
 	public Integer getUserId() {
 		return userId;
 	}

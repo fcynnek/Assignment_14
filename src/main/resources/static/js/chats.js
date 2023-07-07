@@ -31,23 +31,26 @@ messageBox.addEventListener('keyup', (e) => {
 
 function getMessages() {
   let messageContainer = document.querySelector(".message-container");
-  fetch(`/channels/${channelId}`)
-      .then(response => response.json())
+  fetch(`/channels/${channelId}/getMessages`)
+    //   .then(response => (response.json()))
+    //   .then(console.log(response))
+    .then(response => {
+        if (!response.ok) {
+          throw new Error('Error fetching messages');
+        }
+        return response.json();
+      })
       .then(data => {
-          if (Array.isArray(data)) {
-              messageContainer.innerHTML = '';
-              data.forEach(message => {
-                  messageContainer.innerHTML += `<div>
-                      <span class="timestamp">${message.user.name}: </span>
-                      <span class="message">${message.text}</span>
-                  </div>`;
-              });
-          } else {
-              console.error('Invalid response:', data);
-          }
+        messageContainer.innerHTML = '';
+        data.forEach(message => {
+          messageContainer.innerHTML += `<div>
+            <span class="timestamp">${message.user.name}: </span>
+            <span class="message">${message.text}</span>
+          </div>`;
+        });
       })
       .catch(error => {
-          console.error('Error fetching messages:', error);
+        console.error('Error fetching messages:', error);
       });
 }
 

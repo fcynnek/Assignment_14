@@ -18,5 +18,12 @@ public class Assignment14Application {
 	 *Consume and push the data in the fetch/poll
 	 *
 	 *try rest controller and json parser
+	 *
+	 *- are you getting the message that you intent to post?
+- are you associating the message with the correct user?
+- are you encapsulating that message into a sendable message object?
+- are you posting that particular message to the back end?
+- are you getting the message from the back end?
+- are you posting the messages you got, to UI?
 	 */
 }

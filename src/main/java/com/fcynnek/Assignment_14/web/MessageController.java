@@ -42,9 +42,11 @@ public class MessageController {
         model.addAttribute("channelId", channelId);
         return "chats";
 //    	return messageService.getMessages(channelId);
+        // try rest controller take obj and parse
     }
     
-    @GetMapping(value = "/channels/{channelId}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @GetMapping(value = "/channels/{channelId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/channels/{channelId}/getMessages")
     @ResponseBody
     public List<Message> getChannelMessagesJson(@PathVariable Integer channelId) {
         return messageService.getMessages(channelId);

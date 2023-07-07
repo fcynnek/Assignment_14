@@ -1,6 +1,7 @@
 package com.fcynnek.Assignment_14.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Channel {
@@ -39,6 +40,9 @@ public class Channel {
 	}
 	public void addMessage(Message message) {
 		this.messages.add(message);
+	}
+	public void addMessageOfTypeString(Collection<? extends Message> message) {
+		this.messages.addAll(message);
 	}
 	public List<User> getUsers() {
 		return users;

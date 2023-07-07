@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,13 +30,12 @@ public class ChannelController {
 	private Integer channelIdCounter = 1;
 
 	@GetMapping("/channels")
-	public String getChannels (ModelMap model) {
+	public String getChannels (ModelMap model, HttpSession session) {
+		String username = (String) session.getAttribute("username");
 		List<Channel> channels = channelService.findAll();
-		model.put("channels", channels);
-		
-		if (channels.isEmpty()) {
-			model.addAttribute("noChannels", true);
-		}
+
+		model.addAttribute("channels", channels);
+		model.addAttribute("username", username);
 		return "channels";
 	}
 	

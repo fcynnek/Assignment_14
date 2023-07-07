@@ -36,7 +36,7 @@ public class MessageController {
         List<Message> messages = messageService.getMessages(channelId);
         model.addAttribute("messages", messages);
         model.addAttribute("channelId", channelId);
-        return "chats";
+        return "channels";
     }
 
     @PostMapping("/channels/{channelId}/sendMessage")

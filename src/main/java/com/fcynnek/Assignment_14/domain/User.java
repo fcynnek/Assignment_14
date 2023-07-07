@@ -7,7 +7,8 @@ public class User {
 
 	private Integer userId;
 	private String username;
-	private List<Message> messages = new ArrayList<>();
+	private List<String> messages = new ArrayList<>();
+	private Integer  channelId;
 	private List<Channel> channels = new ArrayList<>();
 	
 	
@@ -33,10 +34,10 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public List<Message> getMessages() {
+	public List<String> getMessages() {
 		return messages;
 	}
-	public void setMessages(List<Message> messages) {
+	public void setMessages(List<String> messages) {
 		this.messages = messages;
 	}
 	public List<Channel> getChannels() {
@@ -44,6 +45,12 @@ public class User {
 	}
 	public void setChannels(List<Channel> channels) {
 		this.channels = channels;
+	}
+	public Integer getChannelId() {
+		return channelId;
+	}
+	public void setChannelId(Integer channelId) {
+		this.channelId = channelId;
 	}
 	
 }

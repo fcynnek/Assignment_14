@@ -7,24 +7,26 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.fcynnek.Assignment_14.domain.Channel;
+import com.fcynnek.Assignment_14.domain.User;
 
 @Component
 public class ChannelRepository {
 
-	private HashMap<Integer, Channel> channels = new HashMap<>();
+	private List<Channel> channels = new ArrayList<>();
+	private List<User> users = new ArrayList<>();
 	
 //	public HashMap<Integer, Channel> findAll() {
 //		return channels;
 //	}
 	public List<Channel> findAll() {
-		return new ArrayList<>(channels.values());
+		return channels;
 	}
 	
 	public Channel saveChannel(Integer channelId, String channelName) {
 		Channel channel = new Channel();
 		channel.setChannelId(channelId);
 		channel.setChannelName(channelName);
-		channels.put(channelId, channel);
+		channels.add(channelId, channel);
 		return channel;
 	}
 	

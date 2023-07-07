@@ -1,5 +1,8 @@
 package com.fcynnek.Assignment_14.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Message {
 
 	private Integer messageId;
@@ -8,6 +11,7 @@ public class Message {
 	private Channel channel;
 	private Integer channelId;
 	private String username;
+	private List<String[]> messages = new ArrayList<>();
 	
 	
 	public Integer getMessageId() {
@@ -48,6 +52,12 @@ public class Message {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public List<String[]> getMessages() {
+		return messages;
+	}
+	public void setMessages(List<String[]> messages) {
+		this.messages = messages;
 	}
 	
 	

@@ -9,7 +9,7 @@
     <h2>Messages from the chat room</h2>
     <div class="message-container">
         <div th:each="message : ${messages}" th:inline="text">
-            <span class="timestamp">[[${message.user.name}]]: </span>
+            <!-- <span class="timestamp">[[${message.user.name}]]: </span> -->
             <span class="message">[[${message.text}]]</span>
         </div>
       </div>

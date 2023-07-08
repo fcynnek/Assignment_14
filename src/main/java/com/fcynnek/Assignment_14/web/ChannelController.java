@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fcynnek.Assignment_14.domain.Channel;
+import com.fcynnek.Assignment_14.domain.User;
 import com.fcynnek.Assignment_14.service.ChannelService;
+import com.fcynnek.Assignment_14.service.MessageService;
+import com.fcynnek.Assignment_14.service.UserService;
 
 @Controller
 public class ChannelController {
@@ -25,16 +28,25 @@ public class ChannelController {
 	@Autowired
 	private ChannelService channelService;
 	
+	@Autowired
+	private MessageService messageService;
+	
+	@Autowired
+    private UserService userService;
 	
 
 	@GetMapping("/channels")
 	public String getChannels (ModelMap model) {
 		List<Channel> channels = channelService.findAll();
-		model.put("channels", channels);
+		List<User> users = userService.getAllUsers();
 		
+		if (users.isEmpty()) {
+			return "redirect:/welcome";
+		}		
 		if (channels.isEmpty()) {
 			model.addAttribute("noChannels", true);
 		}
+		model.put("channels", channels);
 		return "channels";
 	}
 	
@@ -45,7 +57,7 @@ public class ChannelController {
 //		Channel channel = new Channel();
 //		channel.setChannelId(channelId);
 //		channel.setChannelName(channelName);
-		channelService.createNewChannel(channelId, channelName);
+		channelService.createNewChannel(channelName);
 		return "redirect:/channels";
 	}
 	

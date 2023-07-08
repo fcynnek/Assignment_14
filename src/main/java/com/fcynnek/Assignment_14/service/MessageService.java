@@ -27,7 +27,7 @@ public class MessageService {
 	private List<Message> messages = new ArrayList<>();
 	
 	public List<Message> getMessages(Integer channelId) {
-		return messageRepo.findAllMessages(channelId);
+		return messageRepo.findAllMessages();
 	}
 
 	public void createMessage(Message message, Integer channelId) {
@@ -40,11 +40,13 @@ public class MessageService {
 	}
 
 	public List<Message> findAll() {
-		return messages;
+		return messageRepo.findAllMessages();
 	}
 
-	public void save(Message message) {
-		messages.add(message);
+	public void save(String message) {
+//		String savedMessage = messages.add(message);
+		
+		messageRepo.saveMessage(message);
 	}
 
 	

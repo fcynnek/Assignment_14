@@ -25,7 +25,7 @@ public class ChannelController {
 	@Autowired
 	private ChannelService channelService;
 	
-	private Integer channelIdCounter = 1;
+	
 
 	@GetMapping("/channels")
 	public String getChannels (ModelMap model) {
@@ -41,7 +41,7 @@ public class ChannelController {
 
 	@PostMapping("/createChannel")
 	public String createChannel(@RequestParam("channelName") String channelName) {
-		Integer channelId = channelIdCounter++;
+		
 //		Channel channel = new Channel();
 //		channel.setChannelId(channelId);
 //		channel.setChannelName(channelName);

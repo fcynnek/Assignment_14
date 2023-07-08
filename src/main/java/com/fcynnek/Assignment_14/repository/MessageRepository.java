@@ -3,6 +3,7 @@ package com.fcynnek.Assignment_14.repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.IntFunction;
 
 import org.springframework.stereotype.Component;
 
@@ -20,14 +21,29 @@ public class MessageRepository {
 		return messages;
 	}
 	
-	public String saveMessages () {
-		Message message = new Message();
+	public void saveMessages (List<String> newMessages) {
 		User user = new User();
-		
 		String username = user.getUsername();
-		List<String> newMessages = user.getMessages();
+		
+		for (String messageText : newMessages) {
+			Message message = new Message();
+			message.setUsername(username);
+			message.setMessage(messageText);
+			
+		}
+
 		
 //		messages.add(newMessages.indexOf(1), message);
-		return messages.add(new)
+//		return messages.add((Message) newMessages);
+	}
+	
+	public void saveMessage (String message) {
+		User user = new User();
+        String username = user.getUsername();
+
+        Message newMessage = new Message();
+        newMessage.setUsername(username);
+        newMessage.setMessage(message);
+        messages.add(newMessage);
 	}
 }

@@ -33,4 +33,8 @@ public class ChannelRepository {
 	public Channel findChannelById (Integer channelId) {
 		return channels.get(channelId);
 	}
+
+//	public Channel save(Channel channel) {
+//		return ((Object) channels).put(channel);
+//	}
 }

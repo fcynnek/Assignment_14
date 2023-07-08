@@ -8,12 +8,18 @@ import org.springframework.stereotype.Service;
 
 import com.fcynnek.Assignment_14.domain.Channel;
 import com.fcynnek.Assignment_14.repository.ChannelRepository;
+import com.fcynnek.Assignment_14.repository.MessageRepository;
 
 @Service
 public class ChannelService {
 
 	@Autowired
 	private ChannelRepository channelRepo;
+	
+	@Autowired
+    private MessageRepository messageRepo;
+	
+	private Integer channelIdCounter = 0;
 	
 //	public HashMap<Integer,Channel> findAll() {
 //		return channelRepo.findAll();
@@ -22,8 +28,9 @@ public class ChannelService {
 		return channelRepo.findAll();
 	}
 	
-	public Channel createNewChannel(Integer channelId, String channelName) {
+	public Channel createNewChannel(String channelName) {
 		Channel channel = new Channel();
+		Integer channelId = channelIdCounter++;
 		channel.setChannelId(channelId);
 		channel.setChannelName(channelName);
 		channelRepo.saveChannel(channelId, channelName);
@@ -34,5 +41,9 @@ public class ChannelService {
 		return channelRepo.findChannelById(channelId);
 	}
 
+//	public Channel saveChannel(Channel channel) {
+//		return channelRepo.save(channel);
+//	}
+	
 	
 }

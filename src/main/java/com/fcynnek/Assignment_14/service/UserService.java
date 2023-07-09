@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 
 import com.fcynnek.Assignment_14.domain.User;
 import com.fcynnek.Assignment_14.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements Converter<String, User>{
 	
 	Integer userId = 0;
 	
@@ -32,5 +33,12 @@ public class UserService {
 	
 	public List<User> getAllUsers() {
 		return userRepo.getAllUsers();
+	}
+
+	@Override
+	public User convert(String source) {
+		User user = new User();
+		user.setUsername(source);
+		return user;
 	}
 }

@@ -58,4 +58,16 @@ public class UserRepository {
 		
 		return users;
 	}
+
+	public Integer getUserId(String username) {
+		Integer userId = null;
+	    for (User user : users) {
+	        if (user.getUsername().equals(username)) {
+	            userId = user.getUserId();
+	            break;
+	        }
+	    }
+	    return userId;
+	}
+
 }

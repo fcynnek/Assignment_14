@@ -34,6 +34,10 @@ public class UserService implements Converter<String, User>{
 	public List<User> getAllUsers() {
 		return userRepo.getAllUsers();
 	}
+	
+	public Integer getUserId(String username) {
+		return userRepo.getUserId(username);
+	}
 
 	@Override
 	public User convert(String source) {

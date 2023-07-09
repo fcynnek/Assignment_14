@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fcynnek.Assignment_14.domain.User;
 import com.fcynnek.Assignment_14.service.ChannelService;
@@ -51,12 +52,15 @@ public class UserController {
 	@ResponseBody
 //	public String postUsername (@RequestParam("username") String username, @RequestBody User sessionUser, ModelMap model) {
 //	public String postUsername (@RequestBody User sessionUser, ModelMap model) {
-	public String postUsername (@RequestParam("username") String username, ModelMap model) {
+	public ModelAndView postUsername (@RequestParam("username") String username, ModelMap model) {
 		User user = userService.createUser(username);
 	    user.setUsername(username); // Set the username field
 //	    userService.createUser(user);
 	    session.setAttribute("user", user.getUsername());
-	    model.addAttribute("user", user); // Add the user object to the model
-        return "redirect:/channels";
+	    ModelAndView modelAndView = new ModelAndView("channels");
+	    modelAndView.addObject("user", user); // Add the user object to the model
+//	    model.addAttribute("user", user); // Add the user object to the model
+//        return "redirect:/channels";
+	    return modelAndView;
 	}
 }

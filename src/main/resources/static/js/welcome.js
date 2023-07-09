@@ -1,20 +1,18 @@
-document.getElementById('submit').addEventListener('click', function () {
+var messageIcon = document.querySelector('.fa-message-smile')
+var submitIcon = document.querySelector('.fa-paper-plane')
+var messageInput = document.querySelector('.message-input')
+var username = sessionStorage.getItem('username')
+
+if (username === null) {
+    alert('Please input a username')
+} 
+
+document.getElementById('submit').addEventListener('click', function() {
     var username = document.getElementById('username').value
     if (username === '') {
         alert('Please input a username')
     } else {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/welcome", true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                sessionStorage.setItem('username', username)
-                window.location.href = '/channels'
-            } else {
-                alert('Error occurred');
-            }
-        };
-        var data = JSON.stringify({ username: username });
-        xhr.send(data);
-
+        sessionStorage.setItem('username', username)
+        window.location.href = '/channels'
     }
 })

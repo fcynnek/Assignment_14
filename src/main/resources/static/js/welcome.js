@@ -8,7 +8,7 @@ document.getElementById('submit').addEventListener('click', function () {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 sessionStorage.setItem('username', username)
-                window.location.href = '/channels'
+                
             } else {
                 alert('Error occurred');
             }

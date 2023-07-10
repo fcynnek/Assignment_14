@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const messageInput = document.getElementById('messageInput');
   const messageContainer = document.getElementById('messageContainer');
 
-  const channelId = sessionStorage.getItem('channelId');
+  const channelId = document.getElementById('channelId').value;
 
   function displayMessage(username, content) {
     const messageElement = document.createElement('div');
@@ -19,18 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    const message = {
-      content: messageInput.value.trim()
-    };
-
-    fetch(`/channels/{channelId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(message)
-    })
+    fetch(`/channels/${channelId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Failed to retrieve messages. Status: ${response.status} ${response.statusText}`);
@@ -39,32 +28,26 @@ document.addEventListener('DOMContentLoaded', function () {
         if (response.status === 204) {
           return []; // Return an empty array
         }
-        return response.json(); // Read the response body as JSON
+        return response.text(); // Read the response body as HTML
       })
       .then(data => {
-        console.log(data); // Log the response body
-        messageContainer.innerHTML = '';
-        data.forEach(message => {
-          displayMessage(message.username, message.content);
-        });
+        messageContainer.innerHTML = data;
       })
       .catch(error => {
         console.error('An error occurred while retrieving messages', error);
       });
   }
 
-
-
   function sendMessage(event) {
     event.preventDefault();
     const content = messageInput.value.trim();
-
+  
     if (content) {
       const message = {
-        content: content
+        message: content
       };
-
-      fetch(`/channels/{channelId}/sendMessage`, {
+  
+      fetch(`/channels/${channelId}/sendMessage`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -84,12 +67,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
   }
-
+  
 
   if (sendMessageForm) {
     sendMessageForm.addEventListener('submit', sendMessage);
   }
 
   pollMessages();
-  setInterval(pollMessages, 500)
-})
+  setInterval(pollMessages, 5000);
+});

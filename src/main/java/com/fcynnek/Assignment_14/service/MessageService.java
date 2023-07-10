@@ -49,5 +49,12 @@ public class MessageService {
 		messageRepo.saveMessage(message);
 	}
 
+	public void save(List<String> messages) {
+		messageRepo.saveMessages(messages);
+	}
+	
+	public void save(Message message) {
+        messageRepo.saveMessage(message);
+    }
 	
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Chat Room</title>
@@ -7,9 +7,13 @@
 
 <body>
     <h2>Messages from the chat room</h2>
-    <div id="messageContainer"></div>
-    <form id="sendMessageForm" action="/channels/{{channelId}}/sendMessage" method="post">
-        <input type="hidden" id="channelId" value="{{channelId}}" />
+    <div id="messageContainer">
+        <div th:each="message : ${messages}">
+            <p th:text="${message.message}"></p>
+        </div>
+    </div>
+    <form id="sendMessageForm" th:action="@{/channels/{channelId}/sendMessage(channelId=${channelId})}" method="post">
+        <input type="hidden" th:value="${channelId}" />
         <input type="text" id="messageInput" placeholder="Enter your message" />
         <button type="submit">Send</button> <button><a href="/channels/">Go back</a></button>
     </form>

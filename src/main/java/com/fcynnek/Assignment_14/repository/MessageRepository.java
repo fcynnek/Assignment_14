@@ -29,7 +29,7 @@ public class MessageRepository {
 			Message message = new Message();
 			message.setUsername(username);
 			message.setMessage(messageText);
-			
+			messages.add(message);
 		}
 
 		
@@ -45,5 +45,10 @@ public class MessageRepository {
         newMessage.setUsername(username);
         newMessage.setMessage(message);
         messages.add(newMessage);
+	}
+
+	public void saveMessage(Message message) {
+		messages.add(message);
+		
 	}
 }

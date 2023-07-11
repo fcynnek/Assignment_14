@@ -50,7 +50,7 @@ public class MessageController {
         model.addAttribute("messages", messages);
         model.addAttribute("channelId", channelId);
         model.addAttribute("users", users);
-        return "chats2";
+        return "chats";
     }
 
     @PostMapping("/channels/{channelId}/sendMessage")

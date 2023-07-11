@@ -32,15 +32,17 @@ messageBox.addEventListener('keyup', (e) => {
 function getMessages() {
   let messageContainer = document.querySelector(".message-container");
   fetch(`/channels/${channelId}/getMessages`)
-    //   .then(response => (response.json()))
+      .then(response => (response.json()))
     //   .then(console.log(response))
     .then(response => {
+      console.log('Entering first if');
         if (!response.ok) {
           throw new Error('Error fetching messages');
         }
         return response.json();
       })
       .then(data => {
+        console.log('Entering second if');
         messageContainer.innerHTML = '';
         data.forEach(message => {
           messageContainer.innerHTML += `<div>

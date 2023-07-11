@@ -61,6 +61,7 @@ public class UserController {
 	    modelAndView.addObject("user", user); // Add the user object to the model
 //	    model.addAttribute("user", user); // Add the user object to the model
 //        return "redirect:/channels";
+	    System.out.println(username);
 	    return modelAndView;
 	}
 }

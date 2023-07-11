@@ -14,10 +14,10 @@
     </div>
     <form id="sendMessageForm" th:action="@{/channels/{channelId}/sendMessage(channelId=${channelId})}" method="post">
         <input type="hidden" th:value="${channelId}" />
-        <input type="text" id="messageInput" placeholder="Enter your message" />
+        <input type="text" id="messageBox" placeholder="Enter your message" />
         <button type="submit">Send</button> <button><a href="/channels/">Go back</a></button>
     </form>
-    <script type="text/javascript" src="/js/chats.js"></script>
+    <script type="text/javascript" src="/js/chats2.js"></script>
 </body>
 
 </html>

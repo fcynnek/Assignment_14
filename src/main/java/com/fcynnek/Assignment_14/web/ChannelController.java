@@ -58,6 +58,7 @@ public class ChannelController {
 //		channel.setChannelId(channelId);
 //		channel.setChannelName(channelName);
 		channelService.createNewChannel(channelName);
+		System.out.println(channelName);
 		return "redirect:/channels";
 	}
 	

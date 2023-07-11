@@ -50,12 +50,13 @@ public class MessageController {
         model.addAttribute("messages", messages);
         model.addAttribute("channelId", channelId);
         model.addAttribute("users", users);
-        return "chats";
+        return "chats2";
     }
 
     @PostMapping("/channels/{channelId}/sendMessage")
     @ResponseBody
     public Message sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
+    	System.out.println(message);
     	ServletContext session = request.getServletContext();
         Channel currentChannelName = channelService.findChannelById(channelId);
         String username = session.getAttribute("username").toString();

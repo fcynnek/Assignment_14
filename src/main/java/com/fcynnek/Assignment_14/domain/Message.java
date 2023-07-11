@@ -13,6 +13,8 @@ public class Message {
 	private String username;
 	private List<String> messages = new ArrayList<>();
 	
+	
+	
 	public void addMessage(String message) {
 		this.messages.add(message);
 	}

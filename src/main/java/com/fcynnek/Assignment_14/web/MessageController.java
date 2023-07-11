@@ -50,7 +50,8 @@ public class MessageController {
     @ResponseBody
     public ResponseEntity<String> sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
 //        message.setChannelId(channelId);
-        messageService.save(message);
+//        messageService.save(message);
+        System.out.println(message);
         return ResponseEntity.ok().build();
     }
 }

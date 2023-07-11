@@ -69,7 +69,9 @@ document.addEventListener('DOMContentLoaded', function () {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(message)
+        body: JSON.stringify( {
+        message: content
+      })
       })
         .then(response => {
           if (response.ok) {

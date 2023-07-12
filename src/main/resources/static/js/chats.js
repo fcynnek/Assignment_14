@@ -41,19 +41,22 @@ document.addEventListener('DOMContentLoaded', function () {
   function sendMessage(event) {
     event.preventDefault();
     const content = messageInput.value.trim();
-  
+    
     if (content) {
       const message = {
         message: content
       };
-  
+      console.log(typeof message)
+      const requestBody = JSON.stringify(message);
+      
       fetch(`/channels/${channelId}/sendMessage`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(message)
+        body: requestBody
       })
+      
         .then(response => {
           if (response.ok) {
             messageInput.value = '';
@@ -67,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
   }
+  
   
 
   if (sendMessageForm) {

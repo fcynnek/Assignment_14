@@ -38,10 +38,6 @@ public class MessageController {
 	@Autowired
 	private HttpSession request;
 	
-//    @Autowired
-//    public MessageController(MessageService messageService) {
-//        this.messageService = messageService;
-//    }
 
     @GetMapping("/channels/{channelId}")
     public String getChannelMessages(@PathVariable Integer channelId, ModelMap model) {
@@ -52,6 +48,13 @@ public class MessageController {
         model.addAttribute("users", users);
         return "chats";
     }
+    
+    /*
+     * 	message request object from js to java
+		You can try to send an object with a username and messages [array of strings]
+
+		Try not to expect string in java
+     */
 
     @PostMapping("/channels/{channelId}/sendMessage")
     @ResponseBody

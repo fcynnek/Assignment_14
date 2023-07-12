@@ -38,7 +38,8 @@ public class UserController {
 	
 	@GetMapping("/welcome")
 	@ResponseBody
-	public User findUsername(@RequestParam("username") String username) {
+//	public User findUsername(@RequestParam("username") String username) {
+	public User findUsername(@RequestBody String username) {
 		User user = userService.findUserByUsername(username);
 		if (user == null) {
 			user = new User();

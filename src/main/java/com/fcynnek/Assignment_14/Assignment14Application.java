@@ -18,7 +18,7 @@ public class Assignment14Application {
 	 *Consume and push the data in the fetch/poll
 	 *
 	 *try rest controller and json parser
-	 *
+	 *https://github.com/ken0gul/chat-app-with-polling-technique
 	 *repos
 	 */
 }

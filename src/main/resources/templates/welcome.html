@@ -1,23 +1,62 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Welcome</title>
-        <script src="https://kit.fontawesome.com/5e7463fc0b.js" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <h2>Welcome! Please log in below:</h2>
-        <form action="" method="post">
-            
-            <div>
-                <i class="fa-solid fa-message-smile"></i>
-                Display Name: <input type="text" id="username" name="username">
-            </div>
-            <div>
-                <button type="button" id="submit"><i class="fa-duotone fa-sparkles"></i> Submit <i class="fa-solid fa-paper-plane"></i></button>
-                
-            </div>
-            <script type="text/javascript" src="/js/welcome.js"></script>
-        </form>
-    </body>
+<html>
+
+<head>
+    <title>Welcome</title>
+</head>
+
+<body>
+    <script>
+        // Check if the user's name is already stored in session storage
+        let storedName = sessionStorage.getItem("username");
+
+        if (storedName) {
+            // User's name is already stored, use it
+            var user = {
+                "username": storedName
+            };
+            console.log(user);
+            fetch(`/welcome?username=${encodeURIComponent(user.username)}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById("welcomeMessage").textContent = `Welcome, ${data.username}!`;
+                    redirectToChannels();
+                });
+        } else {
+            // User's name is not stored, prompt for it
+            let username = prompt("Please enter your username:");
+            var user = {
+                "username": username
+            };
+            console.log(user);
+            fetch(`/welcome?username=${encodeURIComponent(user.username)}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById("welcomeMessage").textContent = `Welcome, ${data.username}!`;
+                    redirectToChannels();
+                });
+
+            // Store the user's name in session storage
+            sessionStorage.setItem("username", username);
+        }
+
+        function redirectToChannels() {
+            window.location.href = "/channels";
+        }
+
+    </script>
+</body>
+
 </html>

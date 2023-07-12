@@ -45,4 +45,8 @@ public class UserService implements Converter<String, User>{
 		user.setUsername(source);
 		return user;
 	}
+
+	public User findUserByUsername(String name) {
+		return userRepo.findUserByUsername(name);
+	}
 }

@@ -1,17 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 
 <head>
-    <title>Chats</title>
+    <title>Channels</title>
     <script type="text/javascript" src="/js/channels.js"></script>
 </head>
 
 <body>
-    <h2>Channels</h2>
+    <h2>Welcome: <th:text="${username}"></th:th:text></h2>
+    
+    <form id="createChannelForm" action="/createChannel" method="post">
+        <button id="createChannel">Create New Channel </button>
+    </form>
     <button id="addChannelButton">Add New Channel</button>
-    <div id="channelsContainer">
-        <!-- Existing channels will be dynamically added here -->
-    </div>
+    <table>
+        <tr id="channelsContainer" th:each="channel : ${channels}">
+            
+            <td>
+                <a th:href="@{/channels/{channelId}(channelId=${channel.channelId})}">[[${channel.channelName}]]</a>
+                    <!-- th:text="${channel.channelName}"></a> -->
+            </td>
+            
+        </tr>
+    </table>
 </body>
 
 </html>

@@ -37,31 +37,16 @@ public class UserController {
 	}
 	
 	@GetMapping("/welcome")
-	public String getWelcome(ModelMap model) {
-		 if (session.getAttribute("username") != null) {
-			 String username = (String) session.getAttribute("username");
-			 User user = userService.createUser(username);
-			 model.put("user", user);
-	            return "redirect:/channels";
-	        }
-	        return "welcome";
-	}
-	
-//	@PostMapping(value = "/welcome", consumes = MediaType.APPLICATION_JSON_VALUE)
-	@PostMapping("/welcome")
 	@ResponseBody
-//	public String postUsername (@RequestParam("username") String username, @RequestBody User sessionUser, ModelMap model) {
-//	public String postUsername (@RequestBody User sessionUser, ModelMap model) {
-	public ModelAndView postUsername (@RequestParam("username") String username, ModelMap model) {
-		User user = userService.createUser(username);
-	    user.setUsername(username); // Set the username field
-//	    userService.createUser(user);
-	    session.setAttribute("user", user.getUsername());
-	    ModelAndView modelAndView = new ModelAndView("channels");
-	    modelAndView.addObject("user", user); // Add the user object to the model
-//	    model.addAttribute("user", user); // Add the user object to the model
-//        return "redirect:/channels";
-	    System.out.println(username);
-	    return modelAndView;
+	public User findUsername(@RequestParam("username") String username) {
+		User user = userService.findUserByUsername(username);
+		if (user == null) {
+			user = new User();
+			user.setUsername(username);
+			userService.createUser(username);
+			return user;
+		}
+		
+		return user;
 	}
 }

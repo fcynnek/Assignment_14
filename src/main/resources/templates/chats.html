@@ -12,7 +12,7 @@
             <p th:text="${message.message}"></p>
         </div>
     </div>
-    <form id="sendMessageForm" th:action="@{/channels/{channelId}/sendMessage(channelId=${channelId})}" method="post">
+    <form id="sendMessageForm" th:action="@{/channels/{channelId}(channelId=${channelId})}" method="post">
         <input type="hidden" th:value="${channelId}" />
         <input type="text" id="messageInput" placeholder="Enter your message" />
         <button type="submit">Send</button> <button><a href="/channels/">Go back</a></button>

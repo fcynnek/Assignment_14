@@ -58,7 +58,7 @@ public class MessageController {
 		Try not to expect string in java
      */
 
-    @PostMapping("/channels/{channelId}/sendMessage")
+    @PostMapping("/channels/{channelId}")
     @ResponseBody
     public Message sendMessage(@PathVariable Integer channelId, @RequestBody String[] messages) {
         ServletContext session = request.getServletContext();
@@ -81,4 +81,20 @@ public class MessageController {
 
         return (Message) savedMessages;
     }
+/*
+Oğulcan Kendirci:
+You are not sending an object
+You are sending a stringified array
+  
+Your Message POJO class should have exactly the same properties with the object that you send from your JS
+Parse not stringify
+
+Rebecca:
+Message domain should have username as a string so that when you fetch everything for the first time you can check if the user already exists in the sessionStorage
+
+look at spoonacular
+send quser:1 message instead of array
+
+you should have a list for messages in your channel domain
+*/
 }

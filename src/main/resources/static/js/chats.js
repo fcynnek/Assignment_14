@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (response.status === 204) {
           return []; // Return an empty array
         }
-        return response.text(); // Read the response body as HTML
+        // return response.text(); // Read the response body as HTML
+        return response.json(); // Read the response body as JSON
       })
       .then(data => {
         messageContainer.innerHTML = data;

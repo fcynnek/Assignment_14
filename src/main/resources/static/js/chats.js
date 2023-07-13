@@ -44,9 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const content = messageInput.value.trim();
   
     if (content) {
-      const messages = [];
-      messages.push(content);
-      const requestBody = JSON.stringify(messages);
+      const requestBody = JSON.stringify({
+        messages: [content],
+        channelId: sessionStorage.getItem('channelId'),
+        username: sessionStorage.getItem('username')
+      });
   
       fetch(`/channels/${channelId}/sendMessage`, {
         method: 'POST',

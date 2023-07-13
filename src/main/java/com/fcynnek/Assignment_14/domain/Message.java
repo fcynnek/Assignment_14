@@ -11,7 +11,7 @@ public class Message {
 	private Channel channel;
 	private Integer channelId;
 	private String username;
-	private List<String> messages = new ArrayList<>();
+	private List<String> messages = new ArrayList<>(); // arrange array after receiving
 	
 //	public Message(List<String> messages, Integer channelId, String username, Channel channel) {
 //		this.messages = messages;

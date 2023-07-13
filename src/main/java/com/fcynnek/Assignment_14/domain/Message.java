@@ -13,6 +13,12 @@ public class Message {
 	private String username;
 	private List<String> messages = new ArrayList<>();
 	
+//	public Message(List<String> messages, Integer channelId, String username, Channel channel) {
+//		this.messages = messages;
+//		this.channelId = channelId;
+//		this.username = username;
+//		this.channel = channel;
+//	}
 	public void addMessage(String message) {
 		this.messages.add(message);
 	}

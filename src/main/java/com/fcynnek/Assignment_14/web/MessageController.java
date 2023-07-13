@@ -1,5 +1,6 @@
 package com.fcynnek.Assignment_14.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HttpServletBean;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fcynnek.Assignment_14.domain.Channel;
 import com.fcynnek.Assignment_14.domain.Message;
 import com.fcynnek.Assignment_14.domain.User;
@@ -58,19 +60,25 @@ public class MessageController {
 
     @PostMapping("/channels/{channelId}/sendMessage")
     @ResponseBody
-    public Message sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
-    	ServletContext session = request.getServletContext();
+    public Message sendMessage(@PathVariable Integer channelId, @RequestBody String[] messages) {
+        ServletContext session = request.getServletContext();
         Channel currentChannelName = channelService.findChannelById(channelId);
         String username = session.getAttribute("username").toString();
         Integer userId = userService.getUserId(username);
-        
-        Message chatMessages = new Message();
-        chatMessages.setMessage(message);
-        chatMessages.setChannelId(channelId);
-        chatMessages.setUsername(username);
-        chatMessages.setChannel(currentChannelName);
-        
-        messageService.save(chatMessages);
-        return chatMessages;
+
+        List<Message> savedMessages = new ArrayList<>();
+
+        for (String message : messages) {
+            Message chatMessage = new Message();
+            chatMessage.setMessage(message);
+            chatMessage.setChannelId(channelId);
+            chatMessage.setUsername(username);
+            chatMessage.setChannel(currentChannelName);
+
+            messageService.save(chatMessage);
+            savedMessages.add(chatMessage);
+        }
+
+        return (Message) savedMessages;
     }
 }

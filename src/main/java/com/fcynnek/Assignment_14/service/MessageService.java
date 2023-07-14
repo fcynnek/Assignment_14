@@ -54,11 +54,11 @@ public class MessageService {
 //		return messageRepo.save(message);
 //	}
 
-	public Message save(List<String> messages) {
+	public Message save(List<Message> Messages) {
 		List<Message> savedMessages = new ArrayList<>();
-		for (String message : messages) {
+		for (Message message : Messages) {
 			Message savedMessage = new Message();
-			savedMessage.setMessage(message);
+			savedMessage.setMessages((List<String>) message);
 			savedMessages.add(savedMessage);
 		}
 		return (Message) savedMessages;

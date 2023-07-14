@@ -63,7 +63,7 @@ public class MessageController {
     public Message sendMessage(@PathVariable Integer channelId, @RequestBody String[] messages) {
         ServletContext session = request.getServletContext();
         Channel currentChannelName = channelService.findChannelById(channelId);
-        String username = session.getAttribute("username").toString();
+        User username = (User) session.getAttribute("username");
 //        Integer userId = userService.getUserId(username);
 
         List<Message> savedMessages = new ArrayList<>();
@@ -71,11 +71,11 @@ public class MessageController {
         for (String message : messages) {
             Message chatMessage = new Message();
             chatMessage.setMessage(message);
-            chatMessage.setChannel(channelId);
-            chatMessage.setUsername(username);
             chatMessage.setChannel(currentChannelName);
+            chatMessage.setUser(username);
+            
 
-            messageService.save(chatMessage);
+            messageService.save(savedMessages);
             savedMessages.add(chatMessage);
         }
 

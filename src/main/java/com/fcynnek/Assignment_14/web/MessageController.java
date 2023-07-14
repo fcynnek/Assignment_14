@@ -64,14 +64,14 @@ public class MessageController {
         ServletContext session = request.getServletContext();
         Channel currentChannelName = channelService.findChannelById(channelId);
         String username = session.getAttribute("username").toString();
-        Integer userId = userService.getUserId(username);
+//        Integer userId = userService.getUserId(username);
 
         List<Message> savedMessages = new ArrayList<>();
 
         for (String message : messages) {
             Message chatMessage = new Message();
             chatMessage.setMessage(message);
-            chatMessage.setChannelId(channelId);
+            chatMessage.setChannel(channelId);
             chatMessage.setUsername(username);
             chatMessage.setChannel(currentChannelName);
 

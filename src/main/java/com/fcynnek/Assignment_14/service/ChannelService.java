@@ -30,20 +30,20 @@ public class ChannelService {
 	
 	public Channel createNewChannel(String channelName) {
 		Channel channel = new Channel();
-		Integer channelId = channelIdCounter++;
-		channel.setChannelId(channelId);
+//		Integer channelId = channelIdCounter++;
+//		channel.setChannelId(channelId);
 		channel.setChannelName(channelName);
-		channelRepo.saveChannel(channelId, channelName);
-		return channel;
+//		channelRepo.save(channelId, channelName);
+		return channelRepo.save(channel);
 	}
 	
 	public Channel findChannelById(Integer channelId) {
-		return channelRepo.findChannelById(channelId);
+		return channelRepo.findById(channelId).get();
 	}
 
-//	public Channel saveChannel(Channel channel) {
-//		return channelRepo.save(channel);
-//	}
+	public Channel saveChannel(Channel channel) {
+		return channelRepo.save(channel);
+	}
 	
 	
 }

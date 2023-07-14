@@ -48,18 +48,22 @@ public class MessageService {
 		return messageRepo.findAll();
 	}
 
-	public Message save(String message) {
-//		String savedMessage = messages.add(message);
-		
-		return messageRepo.save(message);
-	}
+//	public Message save(String message) {
+////		String savedMessage = messages.add(message);
+//		
+//		return messageRepo.save(message);
+//	}
 
 	public Message save(List<String> messages) {
-		return messageRepo.saveAll(messages);
+		List<Message> savedMessages = new ArrayList<>();
+		for (String message : messages) {
+			Message savedMessage = new Message();
+			savedMessage.setMessage(message);
+			savedMessages.add(savedMessage);
+		}
+		return (Message) savedMessages;
 	}
 	
-	public void save(Message message) {
-        messageRepo.saveMessage(message);
-    }
+	
 	
 }

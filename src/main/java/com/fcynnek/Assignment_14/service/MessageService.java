@@ -27,11 +27,16 @@ public class MessageService {
 	private List<Message> messages = new ArrayList<>();
 	
 	public List<Message> getMessages(Integer channelId) {
-		return messageRepo.findAllMessages();
+		Channel channel = channelRepo.findById(channelId).get();
+	    if (channel != null) {
+	        List<Message> existingMessages = channel.getMessages();
+	        return existingMessages;
+	    }
+		return messages;
 	}
 
 	public void createMessage(Message message, Integer channelId) {
-	    Channel channel = channelRepo.findChannelById(channelId);
+	    Channel channel = channelRepo.findById(channelId).get();
 	    if (channel != null) {
 	        List<Message> existingMessages = channel.getMessages();
 	        existingMessages.add(message);
@@ -40,17 +45,17 @@ public class MessageService {
 	}
 
 	public List<Message> findAll() {
-		return messageRepo.findAllMessages();
+		return messageRepo.findAll();
 	}
 
-	public void save(String message) {
+	public Message save(String message) {
 //		String savedMessage = messages.add(message);
 		
-		messageRepo.saveMessage(message);
+		return messageRepo.save(message);
 	}
 
-	public void save(List<String> messages) {
-		messageRepo.saveMessages(messages);
+	public Message save(List<String> messages) {
+		return messageRepo.saveAll(messages);
 	}
 	
 	public void save(Message message) {

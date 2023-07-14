@@ -3,14 +3,29 @@ package com.fcynnek.Assignment_14.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "message")
 public class Message {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer messageId;
 	private String message;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
+	@ManyToOne
+	@JoinColumn(name = "channel_id")
 	private Channel channel;
-	private Integer channelId;
-	private String username;
 	private List<String> messages = new ArrayList<>(); // arrange array after receiving
 	
 //	public Message(List<String> messages, Integer channelId, String username, Channel channel) {
@@ -48,18 +63,6 @@ public class Message {
 	}
 	public void setChannel(Channel channel) {
 		this.channel = channel;
-	}
-	public Integer getChannelId() {
-		return channelId;
-	}
-	public void setChannelId(Integer channelId) {
-		this.channelId = channelId;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	public List<String> getMessages() {
 		return messages;

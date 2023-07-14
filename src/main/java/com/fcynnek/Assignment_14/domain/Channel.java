@@ -3,11 +3,24 @@ package com.fcynnek.Assignment_14.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Channel {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "channel")
+public class Channel {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer channelId;
 	private String channelName;
+	@ManyToMany(mappedBy = "channel")
 	private List<Message> messages;
+	@ManyToMany(mappedBy = "channel")
 	private List<User> users;
 
 

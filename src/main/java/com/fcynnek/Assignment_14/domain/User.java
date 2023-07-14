@@ -3,14 +3,33 @@ package com.fcynnek.Assignment_14.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user")
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
 	private String username;
+	@OneToMany(mappedBy = "user")
 	private List<String> messages = new ArrayList<>();
 	private Integer  channelId;
 	private List<Channel> channels = new ArrayList<>();
 	
+	@ManyToMany
+	@JoinTable(name = "user_channel",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "channel_id"))
 	
 	
 //	public User(Integer userId, String username) {

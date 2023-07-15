@@ -3,6 +3,7 @@ package com.fcynnek.Assignment_14.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,15 +22,14 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
 	private String username;
-	@OneToMany(mappedBy = "user")
-	private List<String> messages = new ArrayList<>();
-	private Integer  channelId;
-	private List<Channel> channels = new ArrayList<>();
-	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Message> messages = new ArrayList<>();
+//	private Integer  channelId;
 	@ManyToMany
 	@JoinTable(name = "user_channel",
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "channel_id"))
+	private List<Channel> channels = new ArrayList<>();
 	
 	
 //	public User(Integer userId, String username) {
@@ -53,10 +53,10 @@ public class User {
 	public String setUsername(String username) {
 		return this.username = username;
 	}
-	public List<String> getMessages() {
+	public List<Message> getMessages() {
 		return messages;
 	}
-	public void setMessages(List<String> messages) {
+	public void setMessages(List<Message> messages) {
 		this.messages = messages;
 	}
 	public List<Channel> getChannels() {
@@ -65,11 +65,11 @@ public class User {
 	public void setChannels(List<Channel> channels) {
 		this.channels = channels;
 	}
-	public Integer getChannelId() {
-		return channelId;
-	}
-	public void setChannelId(Integer channelId) {
-		this.channelId = channelId;
-	}
+//	public Integer getChannelId() {
+//		return channelId;
+//	}
+//	public void setChannelId(Integer channelId) {
+//		this.channelId = channelId;
+//	}
 	
 }

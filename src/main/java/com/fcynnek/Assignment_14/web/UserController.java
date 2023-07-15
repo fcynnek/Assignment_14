@@ -47,20 +47,18 @@ public class UserController {
 	        return "welcome";
 	}
 	
-//	@PostMapping(value = "/welcome", consumes = MediaType.APPLICATION_JSON_VALUE)
+	
 	@PostMapping("/welcome")
 	@ResponseBody
-//	public String postUsername (@RequestParam("username") String username, @RequestBody User sessionUser, ModelMap model) {
-//	public String postUsername (@RequestBody User sessionUser, ModelMap model) {
 	public ModelAndView postUsername (@RequestParam("username") String username, ModelMap model) {
 		User user = userService.createUser(username);
 	    user.setUsername(username); // Set the username field
-//	    userService.createUser(user);
+
 	    session.setAttribute("user", user.getUsername());
 	    ModelAndView modelAndView = new ModelAndView("channels");
 	    modelAndView.addObject("user", user); // Add the user object to the model
-//	    model.addAttribute("user", user); // Add the user object to the model
-//        return "redirect:/channels";
+//	    
+	    System.out.println(user);
 	    return modelAndView;
 	}
 }

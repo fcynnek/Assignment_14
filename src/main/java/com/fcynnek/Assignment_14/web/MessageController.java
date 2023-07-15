@@ -60,7 +60,7 @@ public class MessageController {
 
     @PostMapping("/channels/{channelId}")
     @ResponseBody
-    public Message sendMessage(@PathVariable Integer channelId, @RequestBody String[] messages) {
+    public List<Message> sendMessage(@PathVariable Integer channelId, @RequestBody String[] messages) {
         ServletContext session = request.getServletContext();
         Channel currentChannelName = channelService.findChannelById(channelId);
         User username = (User) session.getAttribute("username");
@@ -73,13 +73,11 @@ public class MessageController {
             chatMessage.setMessage(message);
             chatMessage.setChannel(currentChannelName);
             chatMessage.setUser(username);
-            
-
-            messageService.save(savedMessages);
-            savedMessages.add(chatMessage);
+            savedMessages.add(chatMessage);            
         }
+        messageService.save(savedMessages);
 
-        return (Message) savedMessages;
+        return savedMessages;
     }
 /*
 Oğulcan Kendirci:

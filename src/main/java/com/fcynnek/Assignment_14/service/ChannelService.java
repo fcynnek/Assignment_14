@@ -2,6 +2,8 @@ package com.fcynnek.Assignment_14.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +40,9 @@ public class ChannelService {
 	}
 	
 	public Channel findChannelById(Integer channelId) {
-		return channelRepo.findById(channelId).get();
+		System.out.println("Channel ID: " + channelId);
+		return channelRepo.findById(channelId)
+				.orElseThrow(() -> new NoSuchElementException("Channel not found"));
 	}
 
 	public Channel saveChannel(Channel channel) {

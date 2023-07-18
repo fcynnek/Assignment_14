@@ -21,6 +21,7 @@ import org.springframework.web.servlet.HttpServletBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fcynnek.Assignment_14.domain.Channel;
 import com.fcynnek.Assignment_14.domain.Message;
+import com.fcynnek.Assignment_14.domain.MessageRequest;
 import com.fcynnek.Assignment_14.domain.User;
 import com.fcynnek.Assignment_14.service.ChannelService;
 import com.fcynnek.Assignment_14.service.MessageService;
@@ -38,11 +39,11 @@ public class MessageController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private HttpSession request;
+//	@Autowired
+//	private HttpSession request;
 
 	@GetMapping("/channels/{channelId}")
-	public String getChannelMessages(@PathVariable Integer channelId, ModelMap model) {
+	public String getChannelMessages(@PathVariable Integer channelId, ModelMap model, HttpSession session) {
 		List<User> users = userService.getAllUsers();
 		List<Message> messages = messageService.getMessages(channelId);
 		model.addAttribute("messages", messages);
@@ -53,17 +54,18 @@ public class MessageController {
 
 	@PostMapping("/channels/{channelId}")
 	@ResponseBody
-	public List<Message> sendMessage(@PathVariable Integer channelId, @RequestBody String[] messages) {
-		ServletContext session = request.getServletContext();
+	public List<Message> sendMessage(@PathVariable Integer channelId, @RequestBody List<MessageRequest> messages, HttpSession session) {
+//		sessionData = session.getServletContext();
 		Channel currentChannelName = channelService.findChannelById(channelId);
 		User username = (User) session.getAttribute("username");
 //        Integer userId = userService.getUserId(username);
 
 		List<Message> savedMessages = new ArrayList<>();
 
-		for (String message : messages) {
+		for (MessageRequest messageRequest : messages) {
+			String messageText = messageRequest.getMessage();
 			Message chatMessage = new Message();
-			chatMessage.setMessage(message);
+			chatMessage.setMessage(messageText);
 			chatMessage.setChannel(currentChannelName);
 			chatMessage.setUser(username);
 			savedMessages.add(chatMessage);
@@ -72,7 +74,7 @@ public class MessageController {
 
 		return savedMessages;
 	}
-	
+}
 	// Pete: make a dummy piece to be used to take data and send a system out
 //	@RestController
 //	public class PairController {
@@ -105,4 +107,4 @@ public class MessageController {
 	 * 
 	 * you should have a list for messages in your channel domain
 	 */
-}
+

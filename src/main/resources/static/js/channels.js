@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   addChannelButton.addEventListener('click', function () {
     var channelName = prompt("Enter channel name:");
     if (channelName) {
+      sessionStorage.setItem('newChannelName', channelName); // Store the channel name in session storage
       createChannel(channelName);
     }
   });

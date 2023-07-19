@@ -3,11 +3,26 @@ package com.fcynnek.Assignment_14.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Channel {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "channel")
+public class Channel {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer channelId;
 	private String channelName;
+	@OneToMany(mappedBy = "channel", cascade = CascadeType.ALL)
 	private List<Message> messages;
+	@ManyToMany(mappedBy = "channels")
 	private List<User> users;
 
 

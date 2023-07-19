@@ -2,6 +2,8 @@ package com.fcynnek.Assignment_14.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,12 +28,32 @@ public class MessageService {
 	
 	private List<Message> messages = new ArrayList<>();
 	
+//	public List<Message> getMessages(Integer channelId) {
+//		Channel channel = channelRepo.findById(channelId).get();
+//	    if (channel != null) {
+//	        List<Message> existingMessages = channel.getMessages();
+//	        return existingMessages;
+//	    }
+//		return messages;
+//	}
+	
 	public List<Message> getMessages(Integer channelId) {
-		return messageRepo.findAllMessages();
+	    Optional<Channel> channelOptional = channelRepo.findById(channelId);
+	    if (channelOptional.isPresent()) {
+	        Channel channel = channelOptional.get();
+	        return channel.getMessages();
+	    } else {
+	        // Handle the case when the channel is not found
+	        // For example, you can throw an exception or return an empty list
+	        throw new NoSuchElementException("Channel not found");
+	        // Or return an empty list
+	        // return Collections.emptyList();
+	    }
 	}
 
+
 	public void createMessage(Message message, Integer channelId) {
-	    Channel channel = channelRepo.findChannelById(channelId);
+	    Channel channel = channelRepo.findById(channelId).get();
 	    if (channel != null) {
 	        List<Message> existingMessages = channel.getMessages();
 	        existingMessages.add(message);
@@ -40,14 +62,25 @@ public class MessageService {
 	}
 
 	public List<Message> findAll() {
-		return messageRepo.findAllMessages();
+		return messageRepo.findAll();
 	}
 
-	public void save(String message) {
-//		String savedMessage = messages.add(message);
-		
-		messageRepo.saveMessage(message);
-	}
+//	public Message save(String message) {
+////		String savedMessage = messages.add(message);
+//		
+//		return messageRepo.save(message);
+//	}
 
+	public Message save(List<Message> Messages) {
+		List<Message> savedMessages = new ArrayList<>();
+		for (Message message : Messages) {
+			Message savedMessage = new Message();
+			savedMessage.setMessages((List<Message>) message);
+			savedMessages.add(savedMessage);
+		}
+		return (Message) savedMessages;
+	}
+	
+	
 	
 }

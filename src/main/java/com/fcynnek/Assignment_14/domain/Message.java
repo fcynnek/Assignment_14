@@ -3,66 +3,84 @@ package com.fcynnek.Assignment_14.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "message")
 public class Message {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "message_id")
 	private Integer messageId;
 	private String message;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
+	@ManyToOne
+	@JoinColumn(name = "channel_id")
 	private Channel channel;
-	private Integer channelId;
-	private String username;
-	private List<String> messages = new ArrayList<>();
-	
-	
-	
-	public void addMessage(String message) {
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "message_id")
+	private List<Message> messages = new ArrayList<>(); // arrange array after receiving
+
+	@Override
+	public String toString() {
+		return "Message [user=" + user + ", message=" + message + "]";
+	}
+
+	public void addMessage(Message message) {
 		this.messages.add(message);
 	}
+
 	public Integer getMessageId() {
 		return messageId;
 	}
+
 	public void setMessageId(Integer messageId) {
 		this.messageId = messageId;
 	}
-	
+
 	public String getMessage() {
 		return message;
 	}
+
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public Channel getChannel() {
 		return channel;
 	}
+
 	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
-	public Integer getChannelId() {
-		return channelId;
-	}
-	public void setChannelId(Integer channelId) {
-		this.channelId = channelId;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public List<String> getMessages() {
+
+	public List<Message> getMessages() {
 		return messages;
 	}
-	public void setMessages(List<String> messages) {
+
+	public void setMessages(List<Message> messages) {
 		this.messages = messages;
 	}
-	
-	
+
 }

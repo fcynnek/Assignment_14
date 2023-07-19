@@ -1,95 +1,44 @@
 document.addEventListener('DOMContentLoaded', function () {
   const sendMessageForm = document.getElementById('sendMessageForm');
   const messageInput = document.getElementById('messageInput');
-  const messageContainer = document.getElementById('messageContainer');
+  const messageContainer = document.getElementById('messageArea');
+  const channelId = document.getElementById('channelId').value;
 
-  const channelId = sessionStorage.getItem('channelId');
-
-  function displayMessage(username, content) {
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message');
-    messageElement.textContent = `${username}: ${content}`;
-
-    messageContainer.appendChild(messageElement);
-  }
-
-  function pollMessages() {
-    if (!channelId) {
-      console.error('Invalid channelId');
-      return;
-    }
-
+  function sendMessage() {
     const message = {
-      content: messageInput.value.trim()
+      channelId: channelId,
+      message: messageInput.value,
+      user: sessionStorage.getItem('username')
     };
+    messageInput.value = '';
 
-    fetch(`/channels/{channelId}`, {
+    fetch(`/channel/${channelId}?message=${message.message}&user=${message.user}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(message)
     })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Failed to retrieve messages. Status: ${response.status} ${response.statusText}`);
-        }
-        // Check if the response body is empty
-        if (response.status === 204) {
-          return []; // Return an empty array
-        }
-        return response.json(); // Read the response body as JSON
-      })
+      .then(response => response.json())
       .then(data => {
-        console.log(data); // Log the response body
-        messageContainer.innerHTML = '';
-        data.forEach(message => {
-          displayMessage(message.username, message.content);
-        });
+        console.log(data);
       })
       .catch(error => {
-        console.error('An error occurred while retrieving messages', error);
+        console.error(error);
       });
   }
 
-
-
-  function sendMessage(event) {
-    event.preventDefault();
-    const content = messageInput.value.trim();
-
-    if (content) {
-      const message = {
-        content: content
-      };
-
-      fetch(`/channels/{channelId}/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(message)
-      })
-        .then(response => {
-          if (response.ok) {
-            messageInput.value = '';
-            pollMessages();
-          } else {
-            console.error('Failed to send message');
-          }
-        })
-        .catch(error => {
-          console.error('An error occurred while sending the message', error);
-        });
-    }
+  if (sendMessageForm) {
+    sendMessageForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      sendMessage();
+    });
   }
 
-
-  if (sendMessageForm) {
-    sendMessageForm.addEventListener('submit', sendMessage);
+  function pollMessages() {
+    $('#messageArea').load(window.location.href + ' #messageArea');
   }
 
   pollMessages();
-  setInterval(pollMessages, 500)
-})
+  setInterval(pollMessages, 5000);
+});

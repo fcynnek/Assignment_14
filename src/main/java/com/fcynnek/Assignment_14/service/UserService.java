@@ -27,16 +27,16 @@ public class UserService implements Converter<String, User>{
 	}
 
 	public User findUserById(Integer userId) {
-		return userRepo.findUserById(userId);
+		return userRepo.findById(userId).get();
 //		return null;
 	}
 	
 	public List<User> getAllUsers() {
-		return userRepo.getAllUsers();
+		return userRepo.findAll();
 	}
 	
-	public Integer getUserId(String username) {
-		return userRepo.getUserId(username);
+	public User findByUsername(String username) {
+		return userRepo.findByUsername(username);
 	}
 
 	@Override

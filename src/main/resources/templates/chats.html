@@ -17,8 +17,10 @@
 
         <input type="hidden" id="channelId" th:value="${channelId}" />
         <input type="text" id="messageInput" placeholder="Enter your message" />
-        <button type="submit">Send</button> <button><a href="/channels/">Go back</a></button>
+        <!-- <button type="submit">Send</button>  -->
+        <button onclick="sendMessage()">Send</button> <button><a href="/channels/">Go back</a></button>
     </form>
+    
     <script type="text/javascript" src="/js/chats.js"></script>
 </body>
 

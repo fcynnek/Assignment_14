@@ -3,6 +3,9 @@ package com.fcynnek.Assignment_14.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ public class ChannelService {
 	@Autowired
     private MessageRepository messageRepo;
 	
-	private Integer channelIdCounter = 0;
+	
 	
 //	public HashMap<Integer,Channel> findAll() {
 //		return channelRepo.findAll();
@@ -33,7 +36,7 @@ public class ChannelService {
 	public Channel createNewChannel(String channelName) {
 		Channel channel = new Channel();
 //		Integer channelId = channelIdCounter++;
-//		channel.setChannelId(channelId);
+		
 		channel.setChannelName(channelName);
 //		channelRepo.save(channelId, channelName);
 		return channelRepo.save(channel);
@@ -41,8 +44,8 @@ public class ChannelService {
 	
 	public Channel findChannelById(Integer channelId) {
 		System.out.println("Channel ID: " + channelId);
-		return channelRepo.findById(channelId)
-				.orElseThrow(() -> new NoSuchElementException("Channel not found"));
+		return channelRepo.findById(channelId).get();
+//				.orElseThrow(() -> new NoSuchElementException("Channel not found"));
 	}
 
 	public Channel saveChannel(Channel channel) {

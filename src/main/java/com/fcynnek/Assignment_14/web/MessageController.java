@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.HttpServletBean;
@@ -51,28 +53,51 @@ public class MessageController {
 		model.addAttribute("users", users);
 		return "chats";
 	}
+//	@GetMapping("/channel/{channelId}/messages")
+//	@ResponseBody
+//	public List<Message> getMessages(@PathVariable Integer channelId) {
+//		Channel channel = channelService.findChannelById(channelId);
+//		return channel.getMessages();
+//	}
 
-	@PostMapping("/channels/{channelId}")
+//	@PostMapping("/channels/{channelId}/sendMessage")
+//	@ResponseBody
+//	public List<Message> sendMessage(@PathVariable Integer channelId, @RequestBody List<MessageRequest> messages, HttpSession session) {
+////		sessionData = session.getServletContext();
+//		Channel currentChannelName = channelService.findChannelById(channelId);
+//		User username = (User) session.getAttribute("username");
+////        Integer userId = userService.getUserId(username);
+//
+//		List<Message> savedMessages = new ArrayList<>();
+//
+//		for (MessageRequest messageRequest : messages) {
+//			String messageText = messageRequest.getMessage();
+//			Message chatMessage = new Message();
+//			chatMessage.setMessage(messageText);
+//			chatMessage.setChannel(currentChannelName);
+//			chatMessage.setUser(username);
+//			savedMessages.add(chatMessage);
+//		}
+//		messageService.save(savedMessages);
+//
+//		return savedMessages;
+//	}
+	
+	@PostMapping("/channel/{channelId}")
 	@ResponseBody
-	public List<Message> sendMessage(@PathVariable Integer channelId, @RequestBody List<MessageRequest> messages, HttpSession session) {
-//		sessionData = session.getServletContext();
-		Channel currentChannelName = channelService.findChannelById(channelId);
-		User username = (User) session.getAttribute("username");
-//        Integer userId = userService.getUserId(username);
-
-		List<Message> savedMessages = new ArrayList<>();
-
-		for (MessageRequest messageRequest : messages) {
-			String messageText = messageRequest.getMessage();
-			Message chatMessage = new Message();
-			chatMessage.setMessage(messageText);
-			chatMessage.setChannel(currentChannelName);
-			chatMessage.setUser(username);
-			savedMessages.add(chatMessage);
-		}
-		messageService.save(savedMessages);
-
-		return savedMessages;
+	public ResponseEntity<String> sendMessage(@PathVariable Integer channelId,
+											@RequestParam("message") String message,
+											@RequestParam("user") String username) {
+		Channel channel = channelService.findChannelById(channelId);
+		User user = userService.findByUsername(username);
+		Message chat = new Message();
+		
+		chat.setMessage(message);
+		chat.setUser(user);
+		chat.setChannel(channel);
+		channel.getMessages().add(chat);
+		channelService.saveChannel(channel);
+		return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
 	}
 }
 	// Pete: make a dummy piece to be used to take data and send a system out

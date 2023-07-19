@@ -51,12 +51,18 @@ public class ChannelController {
 	}
 	
 
-	@PostMapping("/createChannel")
-	public String createChannel(@RequestParam("channelName") String channelName) {
-		
-//		String channelName = requestBody.get("channelName");
-		channelService.createNewChannel(channelName);
-		return "redirect:/channels";
+//	@PostMapping("/createChannel")
+//	public String createChannel(@RequestParam("channelName") String channelName) {
+//		
+//		channelService.createNewChannel(channelName);
+//		return "redirect:/channels";
+//	}
+	
+	@PostMapping("/channels")
+	@ResponseBody
+	public Channel createChannel(@RequestBody String channelName) {
+		Channel channel = channelService.createNewChannel(channelName);
+		return channel;
 	}
 	
 }

@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     messageInput.value = '';
 
-    fetch(`/channel/${channelId}?message=${message.message}&user=${message.user}`, {
+    // fetch(`/channel/${channelId}?message=${message.message}&user=${message.user}`, {
+      fetch(`/channel/${channelId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -85,19 +85,21 @@ public class MessageController {
 	
 	@PostMapping("/channel/{channelId}")
 	@ResponseBody
-	public ResponseEntity<String> sendMessage(@PathVariable Integer channelId,
-											@RequestParam("message") String message,
-											@RequestParam("user") String username) {
+//	public ResponseEntity<String> sendMessage(@PathVariable Integer channelId,
+//											@RequestParam("message") String message,
+//											@RequestParam("user") String username) {
+	public Message sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
 		Channel channel = channelService.findChannelById(channelId);
-		User user = userService.findByUsername(username);
+//		User user = userService.findByUsername(username);
 		Message chat = new Message();
 		
 		chat.setMessage(message);
-		chat.setUser(user);
+//		chat.setUser(user);
 		chat.setChannel(channel);
 		channel.getMessages().add(chat);
 		channelService.saveChannel(channel);
-		return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
+//		return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
+		return chat;
 	}
 }
 	// Pete: make a dummy piece to be used to take data and send a system out

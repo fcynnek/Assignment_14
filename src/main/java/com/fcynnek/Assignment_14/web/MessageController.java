@@ -41,8 +41,7 @@ public class MessageController {
 	@Autowired
 	private UserService userService;
 
-//	@Autowired
-//	private HttpSession request;
+
 
 	@GetMapping("/channels/{channelId}")
 	public String getChannelMessages(@PathVariable Integer channelId, ModelMap model, HttpSession session) {
@@ -53,54 +52,46 @@ public class MessageController {
 		model.addAttribute("users", users);
 		return "chats";
 	}
-//	@GetMapping("/channel/{channelId}/messages")
+	
+//	@GetMapping("/channel/{channelId}")
 //	@ResponseBody
 //	public List<Message> getMessages(@PathVariable Integer channelId) {
 //		Channel channel = channelService.findChannelById(channelId);
 //		return channel.getMessages();
 //	}
 
-//	@PostMapping("/channels/{channelId}/sendMessage")
-//	@ResponseBody
-//	public List<Message> sendMessage(@PathVariable Integer channelId, @RequestBody List<MessageRequest> messages, HttpSession session) {
-////		sessionData = session.getServletContext();
-//		Channel currentChannelName = channelService.findChannelById(channelId);
-//		User username = (User) session.getAttribute("username");
-////        Integer userId = userService.getUserId(username);
-//
-//		List<Message> savedMessages = new ArrayList<>();
-//
-//		for (MessageRequest messageRequest : messages) {
-//			String messageText = messageRequest.getMessage();
-//			Message chatMessage = new Message();
-//			chatMessage.setMessage(messageText);
-//			chatMessage.setChannel(currentChannelName);
-//			chatMessage.setUser(username);
-//			savedMessages.add(chatMessage);
-//		}
-//		messageService.save(savedMessages);
-//
-//		return savedMessages;
-//	}
-	
-	@PostMapping("/channel/{channelId}")
-	@ResponseBody
-//	public ResponseEntity<String> sendMessage(@PathVariable Integer channelId,
-//											@RequestParam("message") String message,
-//											@RequestParam("user") String username) {
-	public Message sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
-		Channel channel = channelService.findChannelById(channelId);
-//		User user = userService.findByUsername(username);
-		Message chat = new Message();
-		
-		chat.setMessage(message);
-//		chat.setUser(user);
-		chat.setChannel(channel);
-		channel.getMessages().add(chat);
-		channelService.saveChannel(channel);
-//		return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
-		return chat;
+	@PostMapping("/channels/{channelId}")
+	public ResponseEntity<String> sendMessage(@PathVariable Integer channelId,
+			@RequestParam("message") String message,
+			@RequestParam("user") String username) {
+		Channel currentChannelName = channelService.findChannelById(channelId);
+		User user = userService.findByUsername(username);
+
+			Message chatMessage = new Message();
+			chatMessage.setMessage(message);
+			chatMessage.setChannel(currentChannelName);
+			chatMessage.setUser(user);
+			channelService.saveChannel(currentChannelName);
+
+		return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
+
 	}
+	
+//	@PostMapping("/channel/{channelId}")
+//	@ResponseBody
+//	public Message sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
+//		Channel channel = channelService.findChannelById(channelId);
+////		User user = userService.findByUsername(username);
+//		Message chat = new Message();
+//		
+//		chat.setMessage(message);
+////		chat.setUser(user);
+//		chat.setChannel(channel);
+//		channel.getMessages().add(chat);
+//		channelService.saveChannel(channel);
+//
+//		return chat;
+//	}
 }
 	// Pete: make a dummy piece to be used to take data and send a system out
 //	@RestController

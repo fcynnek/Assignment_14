@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+// document.addEventListener('DOMContentLoaded', function () {
   const sendMessageForm = document.getElementById('sendMessageForm');
   const messageInput = document.getElementById('messageInput');
   const messageContainer = document.getElementById('messageArea');
@@ -36,10 +36,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // function pollMessages() {
+  //   $('#messageArea').load(window.location.href + ' #messageArea');
+  // }
   function pollMessages() {
-    $('#messageArea').load(window.location.href + ' #messageArea');
+    fetch(window.location.href)
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const updatedMessageContainer = doc.getElementById('messageContainer');
+        messageContainer.innerHTML = updatedMessageContainer.innerHTML;
+      })
+      .catch(error => {
+        console.error('Error fetching messages:', error);
+      });
   }
+  
 
   pollMessages();
   setInterval(pollMessages, 5000);
-});
+// });

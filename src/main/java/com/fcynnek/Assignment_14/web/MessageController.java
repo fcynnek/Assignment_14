@@ -53,6 +53,20 @@ public class MessageController {
 		return "chats";
 	}
 	
+	@PostMapping("/channel/{channelId}")
+	@ResponseBody
+	public Message sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
+		Channel channel = channelService.findChannelById(channelId);
+		Message chat = new Message();
+		
+		chat.setMessage(message);
+		chat.setChannel(channel);
+		channel.getMessages().add(chat);
+		channelService.saveChannel(channel);
+		
+		return chat;
+	}
+}
 //	@GetMapping("/channel/{channelId}")
 //	@ResponseBody
 //	public List<Message> getMessages(@PathVariable Integer channelId) {
@@ -60,39 +74,23 @@ public class MessageController {
 //		return channel.getMessages();
 //	}
 
-	@PostMapping("/channels/{channelId}")
-	public ResponseEntity<String> sendMessage(@PathVariable Integer channelId,
-			@RequestParam("message") String message,
-			@RequestParam("user") String username) {
-		Channel currentChannelName = channelService.findChannelById(channelId);
-		User user = userService.findByUsername(username);
-
-			Message chatMessage = new Message();
-			chatMessage.setMessage(message);
-			chatMessage.setChannel(currentChannelName);
-			chatMessage.setUser(user);
-			channelService.saveChannel(currentChannelName);
-
-		return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
-
-	}
-	
-//	@PostMapping("/channel/{channelId}")
-//	@ResponseBody
-//	public Message sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
-//		Channel channel = channelService.findChannelById(channelId);
-////		User user = userService.findByUsername(username);
-//		Message chat = new Message();
-//		
-//		chat.setMessage(message);
-////		chat.setUser(user);
-//		chat.setChannel(channel);
-//		channel.getMessages().add(chat);
-//		channelService.saveChannel(channel);
+//	@PostMapping("/channels/{channelId}")
+//	public ResponseEntity<String> sendMessage(@PathVariable Integer channelId,
+//			@RequestParam("message") String message,
+//			@RequestParam("user") String username) {
+//		Channel currentChannelName = channelService.findChannelById(channelId);
+//		User user = userService.findByUsername(username);
 //
-//		return chat;
+//			Message chatMessage = new Message();
+//			chatMessage.setMessage(message);
+//			chatMessage.setChannel(currentChannelName);
+//			chatMessage.setUser(user);
+//			channelService.saveChannel(currentChannelName);
+//
+//		return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
+//
 //	}
-}
+	
 	// Pete: make a dummy piece to be used to take data and send a system out
 //	@RestController
 //	public class PairController {

@@ -9,6 +9,7 @@
     <h2>Messages from the chat room</h2>
     <div id="messageContainer">
         <div th:each="message : ${messages}">
+            <p th:text="${message.user}"></p>
             <p th:text="${message.message}"></p>
         </div>
     </div>
@@ -26,57 +27,33 @@
     <script type="text/javascript">
         
         // Function to handle the form submission
-        // function sendMessage(event) {
-        //     event.preventDefault(); // Prevent the default form submission
-        //     const messageInput = document.getElementById('messageInput');
-        //     const channelId = document.getElementById('channelId').value;
+        function sendMessage(event) {
+            event.preventDefault(); // Prevent the default form submission
+            const messageInput = document.getElementById('messageInput');
+            const channelId = document.getElementById('channelId').value;
             
-        //     const message = {
-        //         channelId: channelId,
-        //         message: messageInput.value,
-        //         user: sessionStorage.getItem('username')
-        //     };
-        //     messageInput.value = '';
+            const message = {
+                channelId: channelId,
+                message: messageInput.value,
+                user: sessionStorage.getItem('username')
+            };
+            messageInput.value = '';
 
-        //     fetch(`/channel/${channelId}`, {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify(message)
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log(data);
-        //     })
-        //     .catch(error => {
-        //         console.error(error);
-        //     });
-        // }
-        const channelId = document.getElementById('channelId').value;
-            function sendMessage() {
-                const message = {
-                    channelId: channelId,
-                    message: document.getElementById('messageInput'),
-                    user: sessionStorage.getItem('username')
-                };
-                messageInput.value = '';
-
-                fetch(`/channel/${channelId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(message)
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            }
+            fetch(`/channel/${channelId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(message)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }
 
 
         // Attach the sendMessage function to the form's submit event

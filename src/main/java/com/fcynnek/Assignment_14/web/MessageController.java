@@ -47,23 +47,26 @@ public class MessageController {
 	public String getChannelMessages(@PathVariable Integer channelId, ModelMap model, HttpSession session) {
 		List<User> users = userService.getAllUsers();
 		List<Message> messages = messageService.getMessages(channelId);
-		model.addAttribute("messages", messages);
-		model.addAttribute("channelId", channelId);
-		model.addAttribute("users", users);
+		model.put("messages", messages);
+		model.put("channelId", channelId);
+		model.put("users", users);
 		return "chats";
 	}
 	
 	@PostMapping("/channel/{channelId}")
 	@ResponseBody
-	public Message sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
+//	public Message sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
+	public Message sendMessage(@PathVariable Integer channelId,
+			@RequestParam("message") String message, @RequestParam("user") String username) {
 		Channel channel = channelService.findChannelById(channelId);
+//		User user = userService.findByUsername(username);
 		Message chat = new Message();
 		
 		chat.setMessage(message);
 		chat.setChannel(channel);
 		channel.getMessages().add(chat);
 		channelService.saveChannel(channel);
-		
+		System.out.println(userService.getAllUsers() + ": " + message.toString());
 		return chat;
 	}
 }

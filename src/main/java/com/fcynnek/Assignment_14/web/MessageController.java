@@ -47,9 +47,9 @@ public class MessageController {
 	public String getChannelMessages(@PathVariable Integer channelId, ModelMap model, HttpSession session) {
 		List<User> users = userService.getAllUsers();
 		List<Message> messages = messageService.getMessages(channelId);
-		model.put("messages", messages);
-		model.put("channelId", channelId);
-		model.put("users", users);
+		model.addAttribute("messages", messages);
+		model.addAttribute("channelId", channelId);
+		model.addAttribute("users", users);
 		return "chats";
 	}
 	

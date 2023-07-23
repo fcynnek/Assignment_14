@@ -42,6 +42,7 @@ public class UserController {
 			 String username = (String) session.getAttribute("username");
 			 User user = userService.createUser(username);
 			 model.put("user", user);
+			 System.out.println(username);
 	            return "redirect:/channels";
 	        }
 	        return "welcome";

@@ -59,7 +59,7 @@ public class UserController {
 	    ModelAndView modelAndView = new ModelAndView("channels");
 	    modelAndView.addObject("user", user); // Add the user object to the model
 //	    
-	    System.out.println(username);
+	    System.out.println("User input username: " + username);
 	    return modelAndView;
 	}
 }

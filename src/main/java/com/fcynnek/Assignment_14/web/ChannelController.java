@@ -62,7 +62,7 @@ public class ChannelController {
 	@ResponseBody
 	public Channel createChannel(@RequestBody String channelName) {
 		Channel channel = channelService.createNewChannel(channelName);
-		System.out.println(channelName);
+		System.out.println("User input channel name: " + channel.getChannelName());
 		return channel;
 	}
 	

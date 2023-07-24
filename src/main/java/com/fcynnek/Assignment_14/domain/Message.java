@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "message")
 public class Message {
@@ -29,6 +31,7 @@ public class Message {
 	private User user;
 	@ManyToOne
 	@JoinColumn(name = "channel_id")
+//	@JsonIgnore
 	private Channel channel;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "message_id")

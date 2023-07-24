@@ -56,18 +56,18 @@ public class MessageController {
 	
 	@PostMapping("/channel/{channelId}")
 	@ResponseBody
-	public Message sendMessage(@PathVariable Integer channelId, @RequestBody String message) {
+	public Message sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
 //	public Message sendMessage(@PathVariable Integer channelId,
 //			@RequestParam("message") Message message, @RequestParam("user") User user) {
-		Channel channel = channelService.findChannelById(channelId);
+//		Channel channel = channelService.findChannelById(channelId);
 		Message chat = new Message();
 		
-		chat.addMessage(message);
-		chat.setChannel(channel);
-		chat.setUser(user);
-		channel.getMessages().add(chat);
-		channelService.saveChannel(channel);
-		System.out.println(message);
+//		chat.addMessage(message);
+//		chat.setChannel(channel);
+//		chat.setUser(user);
+//		channel.getMessages().add(chat);
+//		channelService.saveChannel(channel);
+		System.out.println(messageRequest);
 		return chat;
 	}
 }

@@ -7,6 +7,12 @@ public class MessageRequest {
 	private String user;
 	
 	
+	@Override
+	public String toString() {
+		return "MessageRequest [channelId=" + channelId + ", message=" + message + ", user=" + user + "]";
+	}
+	
+	
 	public String getChannelId() {
 		return channelId;
 	}

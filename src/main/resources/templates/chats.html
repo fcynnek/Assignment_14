@@ -32,7 +32,7 @@
             const messageInput = document.getElementById('messageInput');
             const channelId = document.getElementById('channelId').value;
             
-            const message = {
+            const messageRequest = {
                 channelId: channelId,
                 message: messageInput.value,
                 user: sessionStorage.getItem('username')
@@ -44,7 +44,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(message)
+                body: JSON.stringify(messageRequest)
             })
             .then(response => response.json())
             .then(data => {

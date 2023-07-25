@@ -55,10 +55,10 @@ public class MessageController {
 	}
 	
 	@PostMapping("/channel/{channelId}")
-	@ResponseBody
-	public Message sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
-//	public Message sendMessage(@PathVariable Integer channelId,
-//			@RequestParam("message") Message message, @RequestParam("user") User user) {
+//	@ResponseBody
+//	public Message sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
+	public Message sendMessage(@PathVariable Integer channelId,
+			@RequestParam("message") MessageRequest message, @RequestParam("user") MessageRequest user) {
 //		Channel channel = channelService.findChannelById(channelId);
 		Message chat = new Message();
 		
@@ -67,7 +67,7 @@ public class MessageController {
 //		chat.setUser(user);
 //		channel.getMessages().add(chat);
 //		channelService.saveChannel(channel);
-		System.out.println(messageRequest);
+		System.out.println(user + " " + message);
 		return chat;
 	}
 }

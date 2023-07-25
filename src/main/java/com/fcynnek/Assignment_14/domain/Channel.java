@@ -26,6 +26,11 @@ public class Channel {
 	private List<User> users;
 
 
+	@Override
+	public String toString() {
+		return "Channel [channelId=" + channelId + ", channelName=" + channelName + ", messages=" + messages
+				+ ", users=" + users + "]";
+	}
 	public Channel() {
 		this.setUsers(new ArrayList<>());
 		this.messages = new ArrayList<>();

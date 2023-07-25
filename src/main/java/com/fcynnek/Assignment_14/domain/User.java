@@ -32,7 +32,12 @@ public class User {
 	private List<Channel> channels = new ArrayList<>();
 	
 	
-//	public User(Integer userId, String username) {
+@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", messages=" + messages + ", channels=" + channels
+				+ "]";
+	}
+	//	public User(Integer userId, String username) {
 //		super();
 //		this.userId = userId;
 //		this.username = username;

@@ -1,9 +1,17 @@
-package com.fcynnek.Assignment_14.domain;
+package com.fcynnek.Assignment_14.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fcynnek.Assignment_14.domain.Channel;
+import com.fcynnek.Assignment_14.domain.Message;
+import com.fcynnek.Assignment_14.domain.User;
 
 public class MessageRequest {
 
+	@JsonProperty("channelId")
 	private Channel channelId;
+	@JsonProperty("message")
 	private Message message;
+	@JsonProperty("user")
 	private User user;
 	
 	
@@ -17,33 +25,24 @@ public class MessageRequest {
 		return channelId;
 	}
 
-
 	public void setChannelId(Channel channelId) {
 		this.channelId = channelId;
 	}
-
 
 	public Message getMessage() {
 		return message;
 	}
 
-
 	public void setMessage(Message message) {
 		this.message = message;
 	}
-
 
 	public User getUser() {
 		return user;
 	}
 
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
-	
-	
+
 }

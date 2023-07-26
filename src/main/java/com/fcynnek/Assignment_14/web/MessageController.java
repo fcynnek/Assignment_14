@@ -23,8 +23,8 @@ import org.springframework.web.servlet.HttpServletBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fcynnek.Assignment_14.domain.Channel;
 import com.fcynnek.Assignment_14.domain.Message;
-import com.fcynnek.Assignment_14.domain.MessageRequest;
 import com.fcynnek.Assignment_14.domain.User;
+import com.fcynnek.Assignment_14.dto.MessageRequest;
 import com.fcynnek.Assignment_14.service.ChannelService;
 import com.fcynnek.Assignment_14.service.MessageService;
 import com.fcynnek.Assignment_14.service.UserService;
@@ -63,12 +63,12 @@ public class MessageController {
 		Channel channel = channelService.findChannelById(channelId);
 		Message chat = new Message();
 		
-		chat.addMessage(message);
+//		chat.setMessage(messageRequest.getMessage());
 		chat.setChannel(channel);
-		chat.setUser(user);
+		chat.setUser(messageRequest.getUser());
 		channel.getMessages().add(chat);
 		channelService.saveChannel(channel);
-		System.out.println("POST: " + user + " " + message);
+		System.out.println("POST: " + messageRequest.getUser() + " " + messageRequest.getMessage());
 		return chat;
 	}
 }

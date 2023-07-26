@@ -60,14 +60,14 @@ public class MessageController {
 	public Message sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
 //	public Message sendMessage(@PathVariable Integer channelId,
 //			@RequestParam("message") Message message, @RequestParam("user") Message user) {
-//		Channel channel = channelService.findChannelById(channelId);
+		Channel channel = channelService.findChannelById(channelId);
 		Message chat = new Message();
 		
-//		chat.addMessage(message);
-//		chat.setChannel(channel);
-//		chat.setUser(user);
-//		channel.getMessages().add(chat);
-//		channelService.saveChannel(channel);
+		chat.addMessage(message);
+		chat.setChannel(channel);
+		chat.setUser(user);
+		channel.getMessages().add(chat);
+		channelService.saveChannel(channel);
 		System.out.println("POST: " + user + " " + message);
 		return chat;
 	}

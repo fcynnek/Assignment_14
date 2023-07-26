@@ -42,7 +42,7 @@ public class UserController {
 			 String username = (String) session.getAttribute("username");
 			 User user = userService.createUser(username);
 			 model.put("user", user);
-			 System.out.println(username);
+			 System.out.println("GET:" + username);
 	            return "redirect:/channels";
 	        }
 	        return "welcome";
@@ -59,7 +59,7 @@ public class UserController {
 	    ModelAndView modelAndView = new ModelAndView("channels");
 	    modelAndView.addObject("user", user); // Add the user object to the model
 //	    
-	    System.out.println("User input username: " + username);
+	    System.out.println("POST: " + username);
 	    return modelAndView;
 	}
 }

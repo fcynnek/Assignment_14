@@ -11,6 +11,8 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fcynnek.Assignment_14.domain.Channel;
 import com.fcynnek.Assignment_14.repository.ChannelRepository;
 import com.fcynnek.Assignment_14.repository.MessageRepository;
@@ -33,12 +35,12 @@ public class ChannelService {
 		return channelRepo.findAll();
 	}
 	
-	public Channel createNewChannel(String channelName) {
+	public Channel createNewChannel(Channel channelName) throws JsonProcessingException {
 		Channel channel = new Channel();
-//		Integer channelId = channelIdCounter++;
-		
-		channel.setChannelName(channelName);
-//		channelRepo.save(channelId, channelName);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(channelName);
+		channel.setChannelName(json);
+
 		return channelRepo.save(channel);
 	}
 	

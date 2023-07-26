@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fcynnek.Assignment_14.domain.Channel;
 import com.fcynnek.Assignment_14.domain.User;
 import com.fcynnek.Assignment_14.service.ChannelService;
@@ -60,9 +61,9 @@ public class ChannelController {
 	
 	@PostMapping("/channels")
 	@ResponseBody
-	public Channel createChannel(@RequestBody String channelName) {
+	public Channel createChannel(@RequestBody Channel channelName) throws JsonProcessingException {
 		Channel channel = channelService.createNewChannel(channelName);
-		System.out.println("User input channel name: " + channel.getChannelName());
+		System.out.println("POST: " + channelName);
 		return channel;
 	}
 	

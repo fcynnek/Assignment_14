@@ -51,14 +51,15 @@ public class MessageController {
 		model.addAttribute("messages", messages);
 		model.addAttribute("channelId", channelId);
 		model.addAttribute("users", users);
+		System.out.println("GET:" + users + channelId + messages);
 		return "chats";
 	}
 	
 	@PostMapping("/channel/{channelId}")
-//	@ResponseBody
-//	public Message sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
-	public Message sendMessage(@PathVariable Integer channelId,
-			@RequestParam("message") MessageRequest message, @RequestParam("user") MessageRequest user) {
+	@ResponseBody
+	public Message sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
+//	public Message sendMessage(@PathVariable Integer channelId,
+//			@RequestParam("message") Message message, @RequestParam("user") Message user) {
 //		Channel channel = channelService.findChannelById(channelId);
 		Message chat = new Message();
 		
@@ -67,7 +68,7 @@ public class MessageController {
 //		chat.setUser(user);
 //		channel.getMessages().add(chat);
 //		channelService.saveChannel(channel);
-		System.out.println(user + " " + message);
+		System.out.println("POST: " + user + " " + message);
 		return chat;
 	}
 }

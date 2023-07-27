@@ -9,13 +9,16 @@ public class MessageRequest {
 
 //	@JsonProperty("channel")
 //	private Channel channel;
-	@JsonProperty("channelId")
-	private Channel channelId;
-	@JsonProperty("message")
-	private Message message;
-	@JsonProperty("user")
-	private User user;
+//	@JsonProperty("channelId")
+//	private Channel channelId;
+//	@JsonProperty("message")
+//	private Message message;
+//	@JsonProperty("user")
+//	private User user;
 	
+	private Integer channelId;
+	private String message;
+	private String user;
 	
 	@Override
 	public String toString() {
@@ -23,27 +26,27 @@ public class MessageRequest {
 	}
 
 
-	public Channel getChannelId() {
+	public Integer getChannelId() {
 		return channelId;
 	}
 
-	public void setChannel(Channel channelId) {
+	public void setChannel(Integer channelId) {
 		this.channelId = channelId;
 	}
 
-	public Message getMessage() {
+	public String getMessage() {
 		return message;
 	}
 
-	public void setMessage(Message message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
 
-	public User getUser() {
+	public String getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 

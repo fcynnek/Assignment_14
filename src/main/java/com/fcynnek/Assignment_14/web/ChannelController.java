@@ -63,6 +63,8 @@ public class ChannelController {
 	@ResponseBody
 	public Channel createChannel(@RequestBody Channel channelName) throws JsonProcessingException {
 		Channel channel = channelService.createNewChannel(channelName);
+		channel.setChannelId(channel.getChannelId());
+		channel.setChannelName(channelName.toString());
 		System.out.println("POST: " + channelName);
 		return channel;
 	}

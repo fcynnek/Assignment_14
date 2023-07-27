@@ -63,12 +63,13 @@ public class MessageController {
 		Channel channel = channelService.findChannelById(channelId);
 		Message chat = new Message();
 		
-//		chat.setMessage(messageRequest.getMessage());
-		chat.setChannel(channel);
-		chat.setUser(messageRequest.getUser());
-		channel.getMessages().add(chat);
-		channelService.saveChannel(channel);
-		System.out.println("POST: " + messageRequest.getUser() + " " + messageRequest.getMessage());
+//		chat.addMessage(messageRequest.getMessage());
+//		chat.setChannel(channel);
+//		chat.setUser(messageRequest.getUser());
+//		channel.getMessages().add(chat);
+//		channelService.saveChannel(channel);
+//		System.out.println("POST: " + messageRequest.getUser() + " " + messageRequest.getMessage());
+		System.out.println(messageRequest);
 		return chat;
 	}
 }

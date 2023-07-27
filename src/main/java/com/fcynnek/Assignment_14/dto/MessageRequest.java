@@ -7,6 +7,8 @@ import com.fcynnek.Assignment_14.domain.User;
 
 public class MessageRequest {
 
+//	@JsonProperty("channel")
+//	private Channel channel;
 	@JsonProperty("channelId")
 	private Channel channelId;
 	@JsonProperty("message")
@@ -25,7 +27,7 @@ public class MessageRequest {
 		return channelId;
 	}
 
-	public void setChannelId(Channel channelId) {
+	public void setChannel(Channel channelId) {
 		this.channelId = channelId;
 	}
 

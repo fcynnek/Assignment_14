@@ -37,6 +37,14 @@
                 message: messageInput.value,
                 user: sessionStorage.getItem('username')
             };
+            // const messageRequest = {
+            //     channel: {
+            //         channelId: channelId,
+            //         channelName: sessionStorage.getItem('channelName')
+            //     },
+            //     message: messageInput.value,
+            //     user: sessionStorage.getItem('username')
+            // };
             messageInput.value = '';
 
             fetch(`/channel/${channelId}`, {

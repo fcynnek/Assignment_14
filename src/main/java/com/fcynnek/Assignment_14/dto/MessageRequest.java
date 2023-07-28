@@ -9,15 +9,15 @@ public class MessageRequest {
 
 //	@JsonProperty("channel")
 //	private Channel channel;
-//	@JsonProperty("channelId")
 //	private Channel channelId;
-//	@JsonProperty("message")
 //	private Message message;
-//	@JsonProperty("user")
 //	private User user;
 	
+	@JsonProperty("channelId")
 	private Integer channelId;
+	@JsonProperty("message")
 	private String message;
+	@JsonProperty("user")
 	private String user;
 	
 	@Override

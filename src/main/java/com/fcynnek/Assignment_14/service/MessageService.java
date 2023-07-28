@@ -75,7 +75,7 @@ public class MessageService {
 		List<Message> savedMessages = new ArrayList<>();
 		for (Message message : Messages) {
 			Message savedMessage = new Message();
-			savedMessage.setMessages((List<Message>) message);
+			savedMessage.setMessages(message);
 			savedMessages.add(savedMessage);
 		}
 		return (Message) savedMessages;

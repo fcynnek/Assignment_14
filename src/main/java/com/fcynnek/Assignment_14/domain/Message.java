@@ -25,7 +25,7 @@ public class Message {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "message_id")
 	private Integer messageId;
-	private String message;
+	private List<String> message;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -35,14 +35,14 @@ public class Message {
 	private Channel channel;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "message_id")
-	private List<Message> messages = new ArrayList<>(); // arrange array after receiving
+	private List<String> messages = new ArrayList<>(); // arrange array after receiving
 
 	@Override
 	public String toString() {
 		return "Message [user=" + user + ", message=" + message + "]";
 	}
 
-	public void addMessage(Message message) {
+	public void addMessage(String message) {
 		this.messages.add(message);
 	}
 
@@ -54,11 +54,11 @@ public class Message {
 		this.messageId = messageId;
 	}
 
-	public String getMessage() {
+	public List<String> getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage(List<String> message) {
 		this.message = message;
 	}
 
@@ -78,11 +78,11 @@ public class Message {
 		this.channel = channel;
 	}
 
-	public List<Message> getMessages() {
+	public List<String> getMessages() {
 		return messages;
 	}
 
-	public void setMessages(List<Message> messages) {
+	public void setMessages(List<String> messages) {
 		this.messages = messages;
 	}
 

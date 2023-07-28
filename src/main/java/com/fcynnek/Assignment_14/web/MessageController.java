@@ -57,14 +57,14 @@ public class MessageController {
 	
 	@PostMapping("/channels/{channelId}")
 	@ResponseBody
-	public Message sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
-//	public Message sendMessage(@PathVariable Integer channelId,
-//			@RequestParam("message") Message message, @RequestParam("user") Message user) {
+//	public Message sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
+	public Message sendMessage(@PathVariable Integer channelId,
+			@RequestParam("message") MessageRequest message, @RequestParam("user") MessageRequest user) {
 		Channel channel = channelService.findChannelById(channelId);
 		Message chat = new Message();
-		User user = new User();
+		User username = new User();
 		
-		chat.setMessage(messageRequest.getMessage());
+		chat.addMessage(message);
 		chat.setChannel(channel);
 		user.setUsername(messageRequest.getUser());
 		channel.getMessages().add(chat);

@@ -25,7 +25,7 @@ public class Message {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "message_id")
 	private Integer messageId;
-	private List<String> message;
+	private String message;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -54,11 +54,11 @@ public class Message {
 		this.messageId = messageId;
 	}
 
-	public List<String> getMessage() {
+	public String getMessage() {
 		return message;
 	}
 
-	public void setMessage(List<String> message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
 

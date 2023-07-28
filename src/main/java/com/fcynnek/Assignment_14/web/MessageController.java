@@ -55,24 +55,24 @@ public class MessageController {
 		return "chats";
 	}
 	
-	@PostMapping("/channels/{channelId}")
-	@ResponseBody
-//	public Message sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
-	public Message sendMessage(@PathVariable Integer channelId,
-			@RequestParam("message") MessageRequest message, @RequestParam("user") MessageRequest user) {
-		Channel channel = channelService.findChannelById(channelId);
-		Message chat = new Message();
-		User username = new User();
-		
-		chat.addMessage(message);
-		chat.setChannel(channel);
-		user.setUsername(messageRequest.getUser());
-		channel.getMessages().add(chat);
-		channelService.saveChannel(channel);
-		System.out.println("POST: " + messageRequest.getUser() + " " + messageRequest.getMessage());
-		System.out.println(messageRequest);
-		return chat;
-	}
+//	@PostMapping("/channels/{channelId}")
+//	@ResponseBody
+////	public Message sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
+//	public Message sendMessage(@PathVariable Integer channelId,
+//			@RequestParam("message") MessageRequest message, @RequestParam("user") MessageRequest user) {
+//		Channel channel = channelService.findChannelById(channelId);
+//		Message chat = new Message();
+//		User username = new User();
+//		
+//		chat.setMessage(message);
+//		chat.setChannel(channel);
+//		user.setUsername(messageRequest.getUser());
+//		channel.getMessages().add(chat);
+//		channelService.saveChannel(channel);
+//		System.out.println("POST: " + messageRequest.getUser() + " " + messageRequest.getMessage());
+//		System.out.println(messageRequest);
+//		return chat;
+//	}
 //}
 //	@GetMapping("/channel/{channelId}")
 //	@ResponseBody
@@ -81,20 +81,20 @@ public class MessageController {
 //		return channel.getMessages();
 //	}
 
-//	@PostMapping("/channels/{channelId}")
-//	public ResponseEntity<String> sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
-//		Channel currentChannelName = channelService.findChannelById(channelId);
-//		User user = new User();
-//		Message chatMessage = new Message();
-//
-//		chatMessage.setMessage(messageRequest.getMessage());
-//		chatMessage.setChannel(currentChannelName);
-//		user.setUsername(messageRequest.getUser());
-//		channelService.saveChannel(currentChannelName);
-//		System.out.println(currentChannelName + chatMessage.getMessage() + user.getUsername());
-//		return ResponseEntity.status(HttpStatus.OK).body("Message sent successfully");
-//
-//	}
+	@PostMapping("/channels/{channelId}")
+	public ResponseEntity<String> sendMessage(@PathVariable Integer channelId, @RequestBody MessageRequest messageRequest) {
+		Channel currentChannelName = channelService.findChannelById(channelId);
+		User user = new User();
+		Message chatMessage = new Message();
+
+		chatMessage.setMessage(messageRequest.getMessage());
+		chatMessage.setChannel(currentChannelName);
+		user.setUsername(messageRequest.getUser());
+		channelService.saveChannel(currentChannelName);
+		System.out.println(currentChannelName + chatMessage.getMessage() + user.getUsername());
+		return ResponseEntity.status(HttpStatus.OK).body("Message sent successfully");
+
+	}
 }
 	// Pete: make a dummy piece to be used to take data and send a system out
 //	@RestController

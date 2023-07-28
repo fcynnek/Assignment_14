@@ -71,14 +71,14 @@ public class MessageService {
 //		return messageRepo.save(message);
 //	}
 
-	public Message save(List<Message> Messages) {
+	public List<Message> save(List<Message> Messages) {
 		List<Message> savedMessages = new ArrayList<>();
 		for (Message message : Messages) {
-			Message savedMessage = new Message();
-			savedMessage.setMessages(message);
-			savedMessages.add(savedMessage);
+			
+//			savedMessage.setMessages(message);
+			savedMessages.add(message);
 		}
-		return (Message) savedMessages;
+		return savedMessages;
 	}
 	
 	

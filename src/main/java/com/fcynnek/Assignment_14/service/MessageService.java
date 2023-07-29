@@ -38,10 +38,9 @@ public class MessageService {
 //	}
 	
 	public List<Message> getMessages(Integer channelId) {
-	    Optional<Channel> channelOptional = channelRepo.findById(channelId);
-	    if (channelOptional.isPresent()) {
-	        Channel channel = channelOptional.get();
-	        return channel.getMessages();
+	    Channel currentChannel = channelRepo.findById(channelId);
+	    if (currentChannel != null) {
+	        return currentChannel.getMessageRepo().allMessages();
 	    } else {
 	        // Handle the case when the channel is not found
 	        // For example, you can throw an exception or return an empty list
@@ -52,18 +51,17 @@ public class MessageService {
 	}
 
 
-	public void createMessage(Message message, Integer channelId) {
-	    Channel channel = channelRepo.findById(channelId).get();
+	public void createMessage(String messageText, Integer channelId, String username) {
+	    Channel channel = channelRepo.findById(channelId);
 	    if (channel != null) {
-	        List<Message> existingMessages = channel.getMessages();
-	        existingMessages.add(message);
-	        channel.setMessages(existingMessages);
+	        channel.getMessageRepo().saveMessage(messageText, username);
+	        
 	    }
 	}
 
-	public List<Message> findAll() {
-		return messageRepo.findAll();
-	}
+//	public List<Message> findAll() {
+//		return messageRepo.findAll();
+//	}
 
 //	public Message save(String message) {
 ////		String savedMessage = messages.add(message);
@@ -71,15 +69,15 @@ public class MessageService {
 //		return messageRepo.save(message);
 //	}
 
-	public List<Message> save(List<Message> Messages) {
-		List<Message> savedMessages = new ArrayList<>();
-		for (Message message : Messages) {
-			
-//			savedMessage.setMessages(message);
-			savedMessages.add(message);
-		}
-		return savedMessages;
-	}
+//	public List<Message> save(List<Message> Messages) {
+//		List<Message> savedMessages = new ArrayList<>();
+//		for (Message message : Messages) {
+//			
+////			savedMessage.setMessages(message);
+//			savedMessages.add(message);
+//		}
+//		return savedMessages;
+//	}
 	
 	
 	

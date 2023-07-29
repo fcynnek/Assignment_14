@@ -13,23 +13,23 @@ import com.fcynnek.Assignment_14.repository.UserRepository;
 @Service
 public class UserService implements Converter<String, User>{
 	
-	Integer userId = 0;
+//	Integer userId = 0;
 	
 	@Autowired
 	private UserRepository userRepo;
 	
 	public User createUser(String username) {
 		User user = new User();
-		user.setUserId(userId++);
+//		user.setUserId(userId++);
 		user.setUsername(username);
-		return user;
-//		return userRepo.saveUser(username);
+//		return user;
+		return userRepo.saveUser(user);
 	}
 
-	public User findUserById(Integer userId) {
-		return userRepo.findById(userId).get();
-//		return null;
-	}
+//	public User findUserById(Integer userId) {
+//		return userRepo.findById(userId).get();
+////		return null;
+//	}
 	
 	public List<User> getAllUsers() {
 		return userRepo.findAll();

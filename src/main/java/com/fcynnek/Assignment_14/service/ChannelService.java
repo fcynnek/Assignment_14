@@ -35,18 +35,16 @@ public class ChannelService {
 		return channelRepo.findAll();
 	}
 	
-	public Channel createNewChannel(Channel channelName) throws JsonProcessingException {
+	public Channel createNewChannel(String channelName) {
 		Channel channel = new Channel();
-		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(channelName);
-		channel.setChannelName(json);
+		channel.setChannelName(channelName);
 
 		return channelRepo.save(channel);
 	}
 	
 	public Channel findChannelById(Integer channelId) {
 		System.out.println("Channel ID: " + channelId);
-		return channelRepo.findById(channelId).get();
+		return channelRepo.findById(channelId);
 //				.orElseThrow(() -> new NoSuchElementException("Channel not found"));
 	}
 

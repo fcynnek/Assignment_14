@@ -17,42 +17,32 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table(name = "message")
+//@Entity
 public class Message {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "message_id")
-	private Integer messageId;
+//	private Integer messageId;
 	private String message;
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-	@ManyToOne
-	@JoinColumn(name = "channel_id")
+	private String username;
 //	@JsonIgnore
-	private Channel channel;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "message_id")
-	private List<String> messages = new ArrayList<>(); // arrange array after receiving
+//	private Channel channel;
+//	private List<String> messages = new ArrayList<>(); // arrange array after receiving
 
 	@Override
 	public String toString() {
-		return "Message [user=" + user + ", message=" + message + "]";
+		return "Message [user=" + username + ", message=" + message + "]";
 	}
 
-	public void addMessage(String message) {
-		this.messages.add(message);
-	}
+//	public void addMessage(String message) {
+//		this.messages.add(message);
+//	}
 
-	public Integer getMessageId() {
-		return messageId;
-	}
-
-	public void setMessageId(Integer messageId) {
-		this.messageId = messageId;
-	}
+//	public Integer getMessageId() {
+//		return messageId;
+//	}
+//
+//	public void setMessageId(Integer messageId) {
+//		this.messageId = messageId;
+//	}
 
 	public String getMessage() {
 		return message;
@@ -62,28 +52,28 @@ public class Message {
 		this.message = message;
 	}
 
-	public User getUser() {
-		return user;
+	public String getUser() {
+		return username;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(String user) {
+		this.username = user;
 	}
 
-	public Channel getChannel() {
-		return channel;
-	}
-
-	public void setChannel(Channel channel) {
-		this.channel = channel;
-	}
-
-	public List<String> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(List<String> messages) {
-		this.messages = messages;
-	}
+//	public Channel getChannel() {
+//		return channel;
+//	}
+//
+//	public void setChannel(Channel channel) {
+//		this.channel = channel;
+//	}
+//
+//	public List<String> getMessages() {
+//		return messages;
+//	}
+//
+//	public void setMessages(List<String> messages) {
+//		this.messages = messages;
+//	}
 
 }

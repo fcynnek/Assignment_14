@@ -14,21 +14,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "user")
+//@Entity
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
 	private String username;
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Message> messages = new ArrayList<>();
-//	private Integer  channelId;
-	@ManyToMany
-	@JoinTable(name = "user_channel",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "channel_id"))
 	private List<Channel> channels = new ArrayList<>();
 	
 	

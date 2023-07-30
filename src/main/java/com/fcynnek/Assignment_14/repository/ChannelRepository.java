@@ -1,5 +1,6 @@
 package com.fcynnek.Assignment_14.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +12,8 @@ import com.fcynnek.Assignment_14.domain.Channel;
 @Component
 public class ChannelRepository {
 
-	private Integer channelId;
-	private List<Channel> allChannels;
+	private Integer channelId = 0;
+	private List<Channel> allChannels = new ArrayList<>();
 	
 	
 	public Channel save(Channel channel) {

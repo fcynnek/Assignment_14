@@ -1,5 +1,6 @@
 package com.fcynnek.Assignment_14.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +12,8 @@ import com.fcynnek.Assignment_14.domain.User;
 @Component
 public class UserRepository {
 
-	private List<User> allUsers;
-	private Integer userId;
+	private List<User> allUsers = new ArrayList<>();
+	private Integer userId = 0;
 	
 	public User saveUser(User user) {
 		Integer currentUserId = userId++;

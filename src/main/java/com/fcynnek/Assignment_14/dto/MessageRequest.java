@@ -13,11 +13,11 @@ public class MessageRequest {
 //	private Message message;
 //	private User user;
 	
-	@JsonProperty("channelId")
+//	@JsonProperty("channelId")
 	private Integer channelId;
-	@JsonProperty("message")
+//	@JsonProperty("message")
 	private String message;
-	@JsonProperty("user")
+//	@JsonProperty("user")
 	private String user;
 	
 	@Override

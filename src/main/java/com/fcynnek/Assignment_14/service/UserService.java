@@ -11,7 +11,7 @@ import com.fcynnek.Assignment_14.domain.User;
 import com.fcynnek.Assignment_14.repository.UserRepository;
 
 @Service
-public class UserService implements Converter<String, User>{
+public class UserService {
 	
 //	Integer userId = 0;
 	
@@ -39,10 +39,4 @@ public class UserService implements Converter<String, User>{
 		return userRepo.findByUsername(username);
 	}
 
-	@Override
-	public User convert(String source) {
-		User user = new User();
-		user.setUsername(source);
-		return user;
-	}
 }

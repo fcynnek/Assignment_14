@@ -1,5 +1,6 @@
 package com.fcynnek.Assignment_14.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +12,7 @@ import com.fcynnek.Assignment_14.domain.Message;
 @Component
 public class MessageRepository {
 
-	private List<Message> allMessages;
+	private List<Message> allMessages = new ArrayList<>();
 	
 	public Message saveMessage (String messageText, String username) {
 		Message message = new Message();

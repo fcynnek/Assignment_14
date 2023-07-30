@@ -19,9 +19,14 @@ public class User {
 
 	private Integer userId;
 	private String username;
-	private List<Message> messages = new ArrayList<>();
-	private List<Channel> channels = new ArrayList<>();
+//	private List<Message> messages = new ArrayList<>();
+//	private List<Channel> channels = new ArrayList<>();
 	
+	
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + "]";
+	}
 	
 //	public User(Integer userId, String username) {
 //		super();
@@ -44,18 +49,18 @@ public class User {
 	public String setUsername(String username) {
 		return this.username = username;
 	}
-	public List<Message> getMessages() {
-		return messages;
-	}
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
-	}
-	public List<Channel> getChannels() {
-		return channels;
-	}
-	public void setChannels(List<Channel> channels) {
-		this.channels = channels;
-	}
+//	public List<Message> getMessages() {
+//		return messages;
+//	}
+//	public void setMessages(List<Message> messages) {
+//		this.messages = messages;
+//	}
+//	public List<Channel> getChannels() {
+//		return channels;
+//	}
+//	public void setChannels(List<Channel> channels) {
+//		this.channels = channels;
+//	}
 //	public Integer getChannelId() {
 //		return channelId;
 //	}

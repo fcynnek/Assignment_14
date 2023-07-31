@@ -11,7 +11,7 @@
         <div th:each="message : ${messages}">
             <!-- <p th:text="${message.user}"></p>
             <p th:text="${message.message}"></p> -->
-            <p th:text="${message.user.username + ': ' + message.message}"></p>
+            <p th:text="${message.user + ': ' + message.message}"></p>
         </div>
     </div>
 

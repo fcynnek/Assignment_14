@@ -62,7 +62,7 @@ public class ChannelController {
 	
 	@PostMapping("/channels")
 	@ResponseBody
-	public Channel createChannel(@RequestBody String JSONchannelName) throws JsonProcessingException {
+	public Channel createChannel(@RequestBody Channel JSONchannelName) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		String channelName = mapper.writeValueAsString(JSONchannelName);
 		Channel channel = channelService.createNewChannel(channelName);

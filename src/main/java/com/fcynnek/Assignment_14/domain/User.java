@@ -23,10 +23,10 @@ public class User {
 //	private List<Channel> channels = new ArrayList<>();
 	
 	
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "User [userId=" + userId + ", username=" + username + "]";
+//	}
 	
 //	public User(Integer userId, String username) {
 //		super();

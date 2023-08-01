@@ -48,6 +48,7 @@ public class ChannelController {
 		if (channels.isEmpty()) {
 			model.addAttribute("noChannels", true);
 		}
+		
 		model.put("channels", channels);
 		return "channels";
 	}
@@ -62,13 +63,15 @@ public class ChannelController {
 	
 	@PostMapping("/channels")
 	@ResponseBody
-	public Channel createChannel(@RequestBody Channel JSONchannelName) throws JsonProcessingException {
+	public Channel createChannel(@RequestBody String JSONchannelName) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-		String channelName = mapper.writeValueAsString(JSONchannelName);
-		Channel channel = channelService.createNewChannel(channelName);
+//		String channelName = mapper.writeValueAsString(JSONchannelName);
+//		Channel channel = channelService.createNewChannel(channelName);
+		Channel channel = mapper.readValue(JSONchannelName, Channel.class);
+		channel = channelService.createNewChannel(channel.getChannelName());
 		channel.setChannelId(channel.getChannelId());
-		channel.setChannelName(channelName.toString());
-		System.out.println("POST: " + channelName);
+//		channel.setChannelName(channelName.toString());
+		System.out.println("POST: " + channel.getChannelName());
 		return channel;
 	}
 	
